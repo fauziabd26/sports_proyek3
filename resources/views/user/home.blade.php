@@ -1,8 +1,6 @@
 @extends('user.template')
 @section('tittle','Sports')
 @section('content')
-<br>
-<br>
 <section class="ftco-section ftco-destination">
     <div class="container">
         <div class="row justify-content-start mb-5 pb-3">
@@ -369,10 +367,10 @@
         <div class="row d-flex justify-content-center">
           <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
             <h2>Daftarkan Mitra anda</h2>
-            <p>Daftarkan mitra anda ke website kami, agar dapat untung denga mudah.</p>
+            <p>Daftarkan mitra anda ke website kami, agar dapat untung dengan mudah.</p>
             <div class="row d-flex justify-content-center mt-5">
               <div class="col-md-8">
-                (tombol daftar mitra)  
+                <a href="/hotel" type="submit" class="btn btn-primary">Daftar mitra</a>
               </div>
             </div>
           </div>
@@ -380,6 +378,4 @@
       </div>
     </div>
   </section>
-<br>
-<br>
 @stop

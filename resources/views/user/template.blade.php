@@ -31,57 +31,38 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
-          <a class="navbar-brand" href="index.html">Sports</a>
+          <a class="navbar-brand" href="/">Sports</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="oi oi-menu"></span> Menu
           </button>
-    
+
           <div class="collapse navbar-collapse" id="ftco-nav">
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-              <li class="nav-item"><a href="hotel.html" class="nav-link">Olahraga</a></li>
-              <li class="nav-item"><a href="blog.html" class="nav-link">Artikel & Tips</a></li>
-              <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-              <li class="nav-item cta"><a href="contact.html" class="nav-link"><span>Login</span></a></li>
-              <li class="nav-item cta"><a href="contact.html" class="nav-link"><span>register</span></a></li>
+              <li class="nav-item"><a href="#home" class="nav-link" title="home">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="#olahraga" title="olahraga">Olahraga</a></li>
+              <li class="nav-item"><a class="nav-link" href="#sarana" title="sarana">Sarana</a></li>
+              <li class="nav-item"><a class="nav-link" href="#artikel" title="artikel">Artikel & Tips</a></li>
+              <li class="nav-item"><a class="nav-link" href="#contact" title="contact">Contact</a></li>
+              <li class="nav-item cta"><a href="/login" class="nav-link"><span>Login</span></a></li>
+              <li class="nav-item cta"><a href="/register" class="nav-link"><span>register</span></a></li>
             </ul>
           </div>
         </div>
+
       </nav>
         <!-- END nav -->
-
+        <section id="home" class="ftco-section services-section bg-light">
     <div class="hero-wrap js-fullheight" style="background-image: url('sports/images/bg.jpeg');">
       <div class="overlay"></div>
       <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
-          <div class="col-md-9 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
+          <div class="col-md-5 ftco-animate" data-scrollax=" properties: { translateY: '50%' }">
             <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><strong>Yuk <br></strong> Olahraga</h1>
-            <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Temukan tempat olahraga yang ingin kamu booking</p>
-            <div class="block-17 my-4">
-              <form action="" method="post" class="d-block d-flex">
-                <div class="fields d-block d-flex">
-                  <div class="textfield-search one-third">
-                  	<input type="text" class="form-control" placeholder="Ex: Sepak Bola, Badminton, Gym">
-                  </div>
-                  <div class="select-wrap one-third">
-                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                    <select name="" id="" class="form-control" placeholder="Keyword search">
-                      <option value="">Lokasi</option>
-                      <option value="">Bekasi</option>
-                      <option value="">Kuningan</option>
-                      <option value="">Cirebon</option>
-                      <option value="">Indramayu</option>
-                    </select>
-                  </div>
-                </div>
-                <input type="submit" class="search-submit btn btn-primary" value="Search">
-              </form>
-            </div>
           </div>
         </div>
       </div>
     </div>
-    <section class="ftco-section services-section bg-light">
+
         <div class="container">
           <div class="row d-flex">
             <div class="col-md-3 d-flex align-self-stretch ftco-animate">
@@ -113,11 +94,248 @@
             </div>
           </div>
         </div>
-      </section>
-    
+    </section>
 
-    @show
-    @yield('content')
+    <section id="olahraga"class="ftco-section ftco-destination">
+        <div class="container">
+            <div class="row justify-content-start mb-5 pb-3">
+                <div class="col-md-7 heading-section ftco-animate">
+                    <span class="subheading">Olahraga</span>
+                    <h2 class="mb-4"><strong>Jenis</strong> Olahraga</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="destination-slider owl-carousel ftco-animate">
+                        <div class="item">
+                            <div class="destination">
+                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url(sports/images/football.jpg);">
+                                    <div class="icon d-flex justify-content-center align-items-center">
+                                        <span class="icon-search2"></span>
+                                    </div>
+                                </a>
+                                <div class="text p-3">
+                                    <h3><a href="#">Sepak Bola</a></h3>
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="destination">
+                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url(sports/images/football.jpg);">
+                                    <div class="icon d-flex justify-content-center align-items-center">
+                                        <span class="icon-search2"></span>
+                                    </div>
+                                </a>
+                                <div class="text p-3">
+                                    <h3><a href="#">Futsal</a></h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="destination">
+                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url(sports/images/gym.png);">
+                                    <div class="icon d-flex justify-content-center align-items-center">
+                                        <span class="icon-search2"></span>
+                                    </div>
+                                </a>
+                                <div class="text p-3">
+                                    <h3><a href="#">Gym</a></h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="destination">
+                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url(sports/images/badminton.jpg);">
+                                    <div class="icon d-flex justify-content-center align-items-center">
+                                        <span class="icon-search2"></span>
+                                    </div>
+                                </a>
+                                <div class="text p-3">
+                                    <h3><a href="#">Badminton</a></h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="destination">
+                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url(sports/images/tenis.jpg);">
+                                    <div class="icon d-flex justify-content-center align-items-center">
+                                        <span class="icon-search2"></span>
+                                    </div>
+                                </a>
+                                <div class="text p-3">
+                                    <h3><a href="#">Tenis</a></h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="destination">
+                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url(sports/images/basket.jpg);">
+                                    <div class="icon d-flex justify-content-center align-items-center">
+                                        <span class="icon-search2"></span>
+                                    </div>
+                                </a>
+                                <div class="text p-3">
+                                    <h3><a href="#">Basket</a></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="sarana" class="ftco-section bg-light">
+        <div class="container">
+            <div class="row justify-content-start mb-5 pb-3">
+                <div class="col-md-7 heading-section ftco-animate">
+                    <span class="subheading">Sarana</span>
+                    <h2 class="mb-4"><strong>Salah Satu</strong> Sarana Olahraga</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+              @foreach($fasilitas as $f)
+              <div class="col-md-4">
+                <div class="card">
+                  <h4 class="card-header">{{ $f->name }}</h4>
+                  <div class="card-body">
+                    <img width="250px" src="{{URL::to('/')}}/file/{{$f->file}}" class="fa-image" width="100px" href="URL::to('/')}}/file/{{$f->file}}"><br>
+                    <p class="card-text"><strong>Fasilitas : </strong>{{ $f->fasilitas }}<br><strong>Alamat : </strong>{{ $f->alamat }} <br> <strong>Kota : </strong>{{ $f->kota }}</p>
+                  </div>
+                  <div class="card-footer">
+                    <a href="/pemesanan" class="btn btn-primary" class="fa fa-shopping-cart">Pesan Sekarang</a>
+                  </div>
+                </div>
+                <br><br>
+              </div>
+              @endforeach
+            </div>
+          </div>
+      </section>
+
+
+      <section id="artikel" class="ftco-section bg-light">
+        <div class="container">
+          <div class="row justify-content-start mb-5 pb-3">
+            <div class="col-md-7 heading-section ftco-animate">
+              <span class="subheading">Recent Blog</span>
+              <h2><strong>Tips</strong> &amp; Articles</h2>
+            </div>
+          </div>
+          <div class="row d-flex">
+            <div class="col-md-3 d-flex ftco-animate">
+              <div class="blog-entry align-self-stretch">
+                <a href="blog-single.html" class="block-20" style="background-image: url('sports/images/image_1.jpg');">
+                </a>
+                <div class="text p-4 d-block">
+                    <span class="tag">Tips, Travel</span>
+                  <h3 class="heading mt-3"><a href="#">8 Best homestay in Philippines</a></h3>
+                  <div class="meta mb-3">
+                    <div><a href="#">August 12, 2018</a></div>
+                    <div><a href="#">Admin</a></div>
+                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 d-flex ftco-animate">
+              <div class="blog-entry align-self-stretch">
+                <a href="blog-single.html" class="block-20" style="background-image: url('sports/images/image_2.jpg');">
+                </a>
+                <div class="text p-4">
+                    <span class="tag">Culture</span>
+                  <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+                  <div class="meta mb-3">
+                    <div><a href="#">August 12, 2018</a></div>
+                    <div><a href="#">Admin</a></div>
+                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 d-flex ftco-animate">
+              <div class="blog-entry align-self-stretch">
+                <a href="blog-single.html" class="block-20" style="background-image: url('sports/images/image_3.jpg');">
+                </a>
+                <div class="text p-4">
+                    <span class="tag">Tips, Travel</span>
+                  <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+                  <div class="meta mb-3">
+                    <div><a href="#">August 12, 2018</a></div>
+                    <div><a href="#">Admin</a></div>
+                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 d-flex ftco-animate">
+              <div class="blog-entry align-self-stretch">
+                <a href="blog-single.html" class="block-20" style="background-image: url('sports/images/image_4.jpg');">
+                </a>
+                <div class="text p-4">
+                    <span class="tag">Tips, Travel</span>
+                  <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+                  <div class="meta mb-3">
+                    <div><a href="#">August 12, 2018</a></div>
+                    <div><a href="#">Admin</a></div>
+                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="ftco-section contact-section ftco-degree-bg">
+        <div class="container">
+          <div class="row d-flex mb-5 contact-info">
+            <div class="col-md-12 mb-4">
+              <h2 class="h4">Contact Information</h2>
+            </div>
+            <div class="w-100"></div>
+            <div class="col-md-3">
+              <p><span>Address:</span> 198 West 21th Street, Suite 721 New York NY 10016</p>
+            </div>
+            <div class="col-md-3">
+              <p><span>Phone:</span> <a href="tel://1234567920">+ 1235 2355 98</a></p>
+            </div>
+            <div class="col-md-3">
+              <p><span>Email:</span> <a href="mailto:info@yoursite.com">info@yoursite.com</a></p>
+            </div>
+            <div class="col-md-3">
+              <p><span>Website</span> <a href="#">yoursite.com</a></p>
+            </div>
+          </div>
+          <div class="row block-9">
+            <div class="col-md-6 pr-md-5">
+              <form action="#">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Your Name">
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Your Email">
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Subject">
+                </div>
+                <div class="form-group">
+                  <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
+                </div>
+                <div class="form-group">
+                  <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
+                </div>
+              </form>
+
+            </div>
+
+            <div class="col-md-6" id="map"></div>
+          </div>
+        </div>
+      </section>
 
     <footer class="ftco-footer ftco-bg-dark ftco-section">
       <div class="container">

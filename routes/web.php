@@ -13,6 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('user/home');
+Route::get('/', 'UtamaController@index');
+Route::get('/olahraga', function () {
+    return view('user/olahraga');
 });
+
+//route CRUD fasilitas
+Route::get('/fasilitas', 'FasilitasController@index');
+Route::get('/fasilitas/cari', 'FasilitasController@cari');
+Route::post('/fasilitas/store', 'FasilitasController@store');
+Route::get('/showfasiliitas','FasilitasController@show');
+Route::put('/fasilitas-update/{id}','FasilitasController@update')->name('fasilitas.update');  
+Route::delete('/fasilitas/destroy/{id}','FasilitasController@destroy')->name('fasilitas.delete');
+Route::get('/homeadmin', 'DashboardController@index')->name('homeadmin');
