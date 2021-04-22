@@ -107,117 +107,53 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="destination-slider owl-carousel ftco-animate">
+                        @foreach($olahraga as $o)
                         <div class="item">
                             <div class="destination">
-                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url(sports/images/football.jpg);">
-                                    <div class="icon d-flex justify-content-center align-items-center">
-                                        <span class="icon-search2"></span>
-                                    </div>
-                                </a>
+                                <img width="200px" src="{{ asset('images') }}/{{$o->image }}" class="fa-image" width="100px" href="URL::to('/')}}/file/{{$o->file}}">
                                 <div class="text p-3">
-                                    <h3><a href="#">Sepak Bola</a></h3>
-                                  </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="destination">
-                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url(sports/images/football.jpg);">
-                                    <div class="icon d-flex justify-content-center align-items-center">
-                                        <span class="icon-search2"></span>
-                                    </div>
-                                </a>
-                                <div class="text p-3">
-                                    <h3><a href="#">Futsal</a></h3>
+                                    <h3><a href="#">{{ $o->name_olahraga }}</a></h3>
                                 </div>
                             </div>
                         </div>
-                        <div class="item">
-                            <div class="destination">
-                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url(sports/images/gym.png);">
-                                    <div class="icon d-flex justify-content-center align-items-center">
-                                        <span class="icon-search2"></span>
-                                    </div>
-                                </a>
-                                <div class="text p-3">
-                                    <h3><a href="#">Gym</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="destination">
-                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url(sports/images/badminton.jpg);">
-                                    <div class="icon d-flex justify-content-center align-items-center">
-                                        <span class="icon-search2"></span>
-                                    </div>
-                                </a>
-                                <div class="text p-3">
-                                    <h3><a href="#">Badminton</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="destination">
-                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url(sports/images/tenis.jpg);">
-                                    <div class="icon d-flex justify-content-center align-items-center">
-                                        <span class="icon-search2"></span>
-                                    </div>
-                                </a>
-                                <div class="text p-3">
-                                    <h3><a href="#">Tenis</a></h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="destination">
-                                <a href="#" class="img d-flex justify-content-center align-items-center" style="background-image: url(sports/images/basket.jpg);">
-                                    <div class="icon d-flex justify-content-center align-items-center">
-                                        <span class="icon-search2"></span>
-                                    </div>
-                                </a>
-                                <div class="text p-3">
-                                    <h3><a href="#">Basket</a></h3>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="sarana" class="ftco-section bg-light">
+    <section id="sarana"class="bg-light ftco-section ftco-destination">
         <div class="container">
             <div class="row justify-content-start mb-5 pb-3">
                 <div class="col-md-7 heading-section ftco-animate">
-                    <span class="subheading">Sarana</span>
-                    <h2 class="mb-4"><strong>Salah Satu</strong> Sarana Olahraga</h2>
+                    <span class="subheading">Olahraga</span>
+                    <h2 class="mb-4"><strong>Sarana</strong> Olahraga</h2>
+                </div>
+            </div>
+            <div class="row d-flex">
+                <div class="col-md-12 d-flex ftco-animate">
+                    <div class="destination-slider owl-carousel ftco-animate">
+                        @foreach($fasilitas as $f)
+                        <div class="item">
+                            <div class="destination blog-entry align-self-stretch">
+                                <img width="200px" src="{{ url('images/fasilitas/'.$f->image) }}" class="block-20" width="100px" href="URL::to('/')}}/file/{{$o->file}}">
+                                <div class="text p-2 d-block">
+                                    <h3 class="card-text"><strong>Nama Sarana : </strong>{{ $f->name }}<br><strong>Fasilitas : </strong>{{ $f->fasilitas }}<br><strong>Alamat : </strong>{{ $f->alamat }} <br> <strong>Kota : </strong>{{ $f->kota }}</h3>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="/pemesanan" class="btn btn-primary" class="fa fa-shopping-cart">Pesan Sekarang</a>
+                                  </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <div class="container">
-            <div class="row">
-              @foreach($fasilitas as $f)
-              <div class="col-md-4">
-                <div class="card">
-                  <h4 class="card-header">{{ $f->name }}</h4>
-                  <div class="card-body">
-                    <img width="250px" src="{{URL::to('/')}}/file/{{$f->file}}" class="fa-image" width="100px" href="URL::to('/')}}/file/{{$f->file}}"><br>
-                    <p class="card-text"><strong>Fasilitas : </strong>{{ $f->fasilitas }}<br><strong>Alamat : </strong>{{ $f->alamat }} <br> <strong>Kota : </strong>{{ $f->kota }}</p>
-                  </div>
-                  <div class="card-footer">
-                    <a href="/pemesanan" class="btn btn-primary" class="fa fa-shopping-cart">Pesan Sekarang</a>
-                  </div>
-                </div>
-                <br><br>
-              </div>
-              @endforeach
-            </div>
-          </div>
-      </section>
-
-
-      <section id="artikel" class="ftco-section bg-light">
+    <section id="artikel" class="ftco-section">
         <div class="container">
           <div class="row justify-content-start mb-5 pb-3">
             <div class="col-md-7 heading-section ftco-animate">
@@ -290,7 +226,7 @@
         </div>
       </section>
 
-      <section id="contact" class="ftco-section contact-section ftco-degree-bg">
+      <section id="contact" class="ftco-section contact-section ftco-degree-bg bg-light">
         <div class="container">
           <div class="row d-flex mb-5 contact-info">
             <div class="col-md-12 mb-4">
@@ -333,6 +269,24 @@
             </div>
 
             <div class="col-md-6" id="map"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="ftco-section-parallax">
+        <div class="parallax-img d-flex align-items-center">
+          <div class="container">
+            <div class="row d-flex justify-content-center">
+              <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
+                <h2>Daftarkan Mitra anda</h2>
+                <p>Daftarkan mitra anda ke website kami, agar dapat untung dengan mudah.</p>
+                <div class="row d-flex justify-content-center mt-5">
+                  <div class="col-md-8">
+                    <a href="/hotel" type="submit" class="btn btn-primary">Daftar mitra</a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

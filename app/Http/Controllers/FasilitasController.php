@@ -5,13 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Fasilitas;
+use App\Olahraga;
 
 class FasilitasController extends Controller
 {
     public function index()
     {
-        $fasilitas = \App\Fasilitas::all();
-        return view('admin.fasilitas', ['fasilitas' => $fasilitas]);
+        $fasilitas = DB::table('fasilitas')
+            ->join('olahraga', 'olahraga.id_olahraga', '=', 'fasilitas.id_olahraga')
+            ->select('fasilitas.*', 'olahraga.*')
+            ->get();
+        $olahraga  = Olahraga::all();
+        return view('admin.fasilitas', compact('olahraga', 'fasilitas'));
     }
 
     public function cari(Request $request)
@@ -30,27 +35,25 @@ class FasilitasController extends Controller
 
     public function store(Request $request)
     {
-        $file = $request->file('file');
-        $new_name = rand() . '.' . $file->getClientOriginalExtension();
-        $file->move(public_path('file'), $new_name);
+        $fasilitas = new Fasilitas();
+        $fasilitas->name = $request->name;
+        $fasilitas->fasilitas = $request->fasilitas;
+        $fasilitas->id_olahraga = $request->id_olahraga;
+        $fasilitas->alamat = $request->alamat;
+        $fasilitas->kota = $request->kota;
 
-        $fasilitas= array(
-            'id'        =>$request->id,
-            'name'      =>$request->name,
-            'fasilitas' =>$request->fasilitas,
-            'kategori'  =>$request->kategori,
-            'alamat'    =>$request->alamat,
-            'kota'      =>$request->kota,
-            'file'      =>$new_name,
-        );
-        Fasilitas::create($fasilitas);
+        $image          = $request->file('image');
+        $imageName = time()."_".$image->getClientOriginalName();
+        $image->move('images/fasilitas/',$imageName);
+        $fasilitas->image = $imageName;
+        $fasilitas->save();
         return redirect('/fasilitas')->with('sukses', 'Data Fasilitas Berhasil Ditambahkan');
     }
 
     public function show()
     {
         $fasilitas = Fasilitas::all();
-        return view('admin.showfasilitas', compact('obat'));
+        return view('admin.showfasilitas', compact('fasilitas'));
     }
 
     public function edit($id)
@@ -58,40 +61,36 @@ class FasilitasController extends Controller
         //
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_fasilitas)
     {
-        $file = $request->file('file');
-        if($request->hasFile('file'))
+        $fasilitas = Fasilitas::find($id_fasilitas);
+
+        $fasilitas->name = $request->name;
+        $fasilitas->fasilitas = $request->fasilitas;
+        $fasilitas->id_olahraga = $request->id_olahraga;
+        $fasilitas->alamat = $request->alamat;
+        $fasilitas->kota = $request->kota;
+
+        if(empty($request->image))
         {
-            $new_name = rand().'.'.$foto->getClientOriginalExtension();
-            $file->move(public_path('file'), $new_name);
-            $fasilitas = array(
-                'name'      =>$request->name,
-                'fasilitas' =>$request->fasilitas,
-                'kategori'  =>$request->kategori,
-                'alamat'    =>$request->alamat,
-                'kota'      =>$request->kota,
-                'file'      =>$new_name,
-            );
-            Fasilitas::whereId($id)->update($fasilitas);
-            return redirect('/fasilitas');
-        }else {
-            $fasilitas = array(
-                'name'      =>$request->name,
-                'fasilitas' =>$request->fasilitas,
-                'kategori'  =>$request->kategori,
-                'alamat'    =>$request->alamat,
-                'kota'      =>$request->kota,
-            );
-            Fasilitas::whereId($id)->update($fasilitas);
-            return redirect('/fasilitas');
+            $fasilitas->image = $fasilitas->image;
         }
+        else
+        {
+            unlink('images/fasilitas/',$fasilitas->image);
+            $file = $request->file('image');
+            $imageName = time()."_".$file->getClientOriginalName();
+            $file->move('images/fasilitas/',$imageName);
+            $fasilitas->image = $name_file;
+        }
+        $fasilitas->save();
+        return redirect('/fasilitas')->with('alert-success', 'Data Berhasil diubah');
     }
-    public function destroy($id)
+    public function destroy($id_fasilitas)
     {
         try {
-            DB::table('fasilitas')->where('id', $id)->delete();
-            return redirect('/fasilitas')->with('success', 'Paket Berhasil Dihapus');
+            DB::table('fasilitas')->where('id_fasilitas', $id_fasilitas)->delete();
+            return redirect('/fasilitas')->with('success', 'Data Berhasil Dihapus');
         } catch (\Throwable $th) {
             return redirect('/fasilitas')->withErrors('Data gagal Dihapus');
         }

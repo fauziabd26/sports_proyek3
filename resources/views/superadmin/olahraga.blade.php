@@ -1,4 +1,4 @@
-@extends('admin.template')
+@extends('superadmin.template')
 @section('content')
 <!-- page content -->
 <div class="content-wrapper">
@@ -8,7 +8,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title"><a href="/fasilitas"><h2>Data Sarana</h2></a></h3>
+                            <h3 class="card-title"><a href="/olahraga"><h2>Kategori Olahraga</h2></a></h3>
                         </div>
                         <br>
                         @if(count($errors) > 0)
@@ -20,51 +20,45 @@
                 @endif
                         <div class="data-tools">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-tambah">
-                                <i class="fa fa-plus"></i>  Tambah Data Sarana
+                                <i class="fa fa-plus"></i>  Tambah Kategori
                             </button>
                         </div>
-                        @if(count($fasilitas))
+                        @if(count($olahraga))
                             <div class="card-body">
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
-                                            <th>Nama Sarana</th>
-                                            <th>Fasilitas</th>
+                                            <th scope="col">No</th>
                                             <th>Kategori Olahraga</th>
-                                            <th>Alamat</th>
-                                            <th>Kota</th>
                                             <th>Gambar</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <?php $no = 1;?>
-                                        @foreach($fasilitas as $f)
+                                    <?php $no = 1;?>
+                                    @foreach($olahraga as $o)
+                                        <tbody>
                                             <tr>
-                                                <th scope="row">{{ $no++ }}</td>
-                                                <td>{{ $f->name }}</td>
-                                                <td>{{ $f->fasilitas }}</td>
-                                                <td>{{ $f->name_olahraga }}</td>
-                                                <td>{{ $f->alamat }}</td>
-                                                <td>{{ $f->kota }}</td>
-                                                <td><img src="{{ url('images/fasilitas/'.$f->image) }}" width:"100px"></td>
+                                                <td>{{ $no++ }}</td>
+                                                <td>{{ $o->name_olahraga }}</td>
+                                                <td><img src="{{ asset('images') }}/{{ $o->image }}" style="width: 100px;" href="{{ asset('images') }}/{{ $o->image }}" ></td>
                                                 <td>
-                                                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-{{ $f->id_fasilitas }}">
+                                                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-{{ $o->id_olahraga }}">
                                                         <i class="fa fa-edit"></i> Edit
                                                     </button>
-                                                    <a href="fasilitas-destroy{{$f->id_fasilitas}}" class="btn btn-danger btn-sm" onclick="return confirm('Anda yakin mau menghapus item ini ?')">
+                                                    <a href="olahraga-destroy{{$o->id_olahraga}}" class="btn btn-danger btn-sm" onclick="return confirm('Anda yakin mau menghapus item ini ?')">
                                                         <i class="fas fa-trash"></i> Delete
                                                     </a>
                                                 </td>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
+                                        </tbody>
+
+                                    @endforeach
                                 </table>
                             </div>
                         @else
+                        <br><br>
                             <div class="alert alert-primary">
-                                <i class="fa fa-exclamation-triangle"></i> Data Sarana Belum tersedia
+                                <i class="fa fa-exclamation-triangle"></i> Data Kategori Olahraga Belum tersedia
                             </div>
                         @endif
                         <br>
@@ -81,15 +75,22 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLabel">Tambah Data Sarana</h4>
+                <h4 class="modal-title" id="exampleModalLabel">Tambah Kategori Olahraga</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="/fasilitas/store"  method="POST" enctype="multipart/form-data">
+            <form action="/olahraga/store"  method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="modal-body">
-                    @include('admin.form')
+                    <div class="form-group">
+                        <label class="control-label" for="name_olahraga">Kategori Olahraga</label>
+                        <input type="text" name="name_olahraga" class="form-control" id="name_olahraga" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="file">Upload Gambar</label>
+                        <input type="file" name="file" class="form-control" required>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -101,58 +102,35 @@
 </div>
 <!-- End Modal - Tambah -->
 
-@foreach ($fasilitas as $f)
+@foreach ($olahraga as $o)
 <!-- Modal EDIT -->
-<div class="modal fade" id="modal-edit-{{ $f->id_fasilitas }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal-edit-{{ $o->id_olahraga }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLabel">Edit Data Sarana</h4>
+                <h4 class="modal-title" id="exampleModalLabel">Edit Kategori Olahraga</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-            <form action="{{ route('fasilitas.update',$f->id_fasilitas) }}"  method="POST">
-                {{ method_field('put') }}
-                {{ csrf_field() }}
+                <form action="{{ route('olahraga.update',$o->id_olahraga) }}"  method="POST" enctype="multipart/form-data">
+                @csrf
                 <div class="form-group">
-                    <label class="control-label" for="name">Nama Sarana</label>
-                    <input type="text" name="name" class="form-control" id="name" value="{{ $f->name }}">
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="fasilitas">Fasilitas</label>
-                    <input type="text" name="fasilitas" class="form-control" id="fasilitas" value="{{ $f->fasilitas }}">
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="kategori">Kategori Olahraga</label>
-                    <select class="control-label" name="id_olahraga" id="id_olahraga" style="width: 100%">
-                        @foreach ($olahraga as $o)
-                        <option value="{{ $o->id_olahraga }}">
-                        {{$o->name_olahraga}}
-                          </option>
-                        @endforeach
-                      </select>
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="alamat">Alamat</label>
-                    <input type="text" name="alamat" class="form-control" id="alamat" value="{{ $f->alamat }}">
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="kota">Kota</label>
-                    <input type="text" name="kota" class="form-control" id="kota" value="{{ $f->kota }}">
+                    <label class="control-label" for="name_olahraga">Kategori Olahraga</label>
+                    <input type="text" name="name_olahraga" class="form-control" id="name_olahraga" value="{{ $o->name_olahraga }}">
                 </div>
                 <div class="row form-group">
                     <label  class="control-label" for="text">Foto Kategori Olahraga Lama</label>
                     <div class="col-sm-8">
-                        <td><img src="{{ url('public/images/fasilitas/'.$f->image) }}" width: "100px"></td>
+                        <img src="{{ asset('images') }}/{{$o->image }}" style="width: 100px;">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="image">Upload Gambar Kategori Olahraga Baru </label>
                     <input type="file" name="image" class="form-control">
                 </div>
-                </div>
+            </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-success">Save changes</button>
@@ -163,4 +141,20 @@
 </div>
 <!-- End Modal - EDIT -->
 @endforeach
+
+@endsection
+@section('js')
+<script>
+  function previewFile(input){
+      var file = $("input[type=file]").get(0).files[0];
+      if(file)
+      {
+          var reader = new FileReader();
+          reader.onload = function(){
+              $("#previewImg").attr("src",reader.result);
+          }
+          reader.readAsDataURL(file);
+      }
+  }
+</script>
 @endsection

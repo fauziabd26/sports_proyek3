@@ -22,7 +22,23 @@ Route::get('/olahraga', function () {
 Route::get('/fasilitas', 'FasilitasController@index');
 Route::get('/fasilitas/cari', 'FasilitasController@cari');
 Route::post('/fasilitas/store', 'FasilitasController@store');
-Route::get('/showfasiliitas','FasilitasController@show');
-Route::put('/fasilitas-update/{id}','FasilitasController@update')->name('fasilitas.update');  
-Route::delete('/fasilitas/destroy/{id}','FasilitasController@destroy')->name('fasilitas.delete');
-Route::get('/homeadmin', 'DashboardController@index')->name('homeadmin');
+Route::get('/showfasiliitas', 'FasilitasController@show');
+Route::put('/fasilitas-update/{id_fasilitas}', 'FasilitasController@update')->name('fasilitas.update');
+Route::get('/fasilitas-destroy{id_fasilitas}', 'FasilitasController@destroy')->name('fasilitas.delete');
+
+//route Dashboard Admin
+Route::get('/homeadmin', 'DashboardadminController@index')->name('homeadmin');
+Route::get('/homesuperadmin', 'DashboardsuperadminController@index')->name('homesuperadmin');
+
+//route CRUD Olahraga(Super)
+Route::get('/olahraga', 'OlahragaController@index');
+Route::get('/olahraga/cari', 'OlahragaController@cari');
+Route::post('/olahraga/store', 'OlahragaController@store');
+Route::get('/showolahraga', 'OlahragaController@show');
+Route::post('/olahraga-update/{id}', 'OlahragaController@update')->name('olahraga.update');
+Route::get('/olahraga-destroy{id_olahraga}', 'OlahragaController@destroy')->name('olahraga.delete');
+
+//route CRUD Olahraga(Super)
+Route::get('/tambahsewa', 'TambahSewaController@index');
+Route::post('/tambahsewa/input', 'TransaksiController@store');
+Route::get('/tambahsewa/datalapangan', 'TambahSewaController@dataLapangan');
