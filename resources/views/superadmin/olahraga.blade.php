@@ -11,13 +11,7 @@
                             <h3 class="card-title"><a href="/olahraga"><h2>Kategori Olahraga</h2></a></h3>
                         </div>
                         <br>
-                        @if(count($errors) > 0)
-                  <div class="alert alert-danger">
-                    @foreach ($errors->all() as $error)
-                      {{ $error }} <br/>
-                    @endforeach
-                  </div>
-                @endif
+
                         <div class="data-tools">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-tambah">
                                 <i class="fa fa-plus"></i>  Tambah Kategori

@@ -137,7 +137,7 @@
                         @foreach($fasilitas as $f)
                         <div class="item">
                             <div class="destination blog-entry align-self-stretch">
-                                <img width="200px" src="{{ url('images/fasilitas/'.$f->image) }}" class="block-20" width="100px" href="URL::to('/')}}/file/{{$o->file}}">
+                                <img src="{{ url('images/fasilitas/'.$f->foto) }}" class="block-20" width="100px">
                                 <div class="text p-2 d-block">
                                     <h3 class="card-text"><strong>Nama Sarana : </strong>{{ $f->name }}<br><strong>Fasilitas : </strong>{{ $f->fasilitas }}<br><strong>Alamat : </strong>{{ $f->alamat }} <br> <strong>Kota : </strong>{{ $f->kota }}</h3>
                                 </div>

@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Fasilitas;
 use App\Olahraga;
+use DB;
+use App\Http\Resources\Fasilitas as FasilitasResource;
 
 class FasilitasController extends Controller
 {
@@ -15,22 +16,8 @@ class FasilitasController extends Controller
             ->join('olahraga', 'olahraga.id_olahraga', '=', 'fasilitas.id_olahraga')
             ->select('fasilitas.*', 'olahraga.*')
             ->get();
-        $olahraga  = Olahraga::all();
-        return view('admin.fasilitas', compact('olahraga', 'fasilitas'));
-    }
-
-    public function cari(Request $request)
-    {
-        $cari = $request->cari;
-        $fasilitas = DB::table('fasilitas')
-            ->where('kota', 'like', "%" . $cari . "%")
-            ->paginate();
-        return view('admin.fasilitas', ['fasilitas' => $fasilitas]);
-    }
-
-    public function create()
-    {
-        //
+        var_dump($fasilitas);
+        return view('admin.fasilitas', compact('fasilitas'));
     }
 
     public function store(Request $request)
@@ -42,10 +29,10 @@ class FasilitasController extends Controller
         $fasilitas->alamat = $request->alamat;
         $fasilitas->kota = $request->kota;
 
-        $image          = $request->file('image');
-        $imageName = time()."_".$image->getClientOriginalName();
-        $image->move('images/fasilitas/',$imageName);
-        $fasilitas->image = $imageName;
+        $image          = $request->file('foto');
+        $imageName = time() . "_" . $image->getClientOriginalName();
+        $image->move('images/fasilitas/', $imageName);
+        $fasilitas->foto = $imageName;
         $fasilitas->save();
         return redirect('/fasilitas')->with('sukses', 'Data Fasilitas Berhasil Ditambahkan');
     }
@@ -71,17 +58,14 @@ class FasilitasController extends Controller
         $fasilitas->alamat = $request->alamat;
         $fasilitas->kota = $request->kota;
 
-        if(empty($request->image))
-        {
-            $fasilitas->image = $fasilitas->image;
-        }
-        else
-        {
-            unlink('images/fasilitas/',$fasilitas->image);
-            $file = $request->file('image');
-            $imageName = time()."_".$file->getClientOriginalName();
-            $file->move('images/fasilitas/',$imageName);
-            $fasilitas->image = $name_file;
+        if (empty($request->foto)) {
+            $fasilitas->foto = $fasilitas->foto;
+        } else {
+            unlink('images/fasilitas/', $fasilitas->foto);
+            $file = $request->file('foto');
+            $imageName = time() . "_" . $file->getClientOriginalName();
+            $file->move('images/fasilitas/', $imageName);
+            $fasilitas->foto = $name_file;
         }
         $fasilitas->save();
         return redirect('/fasilitas')->with('alert-success', 'Data Berhasil diubah');

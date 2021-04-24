@@ -8,7 +8,7 @@ class Fasilitas extends Model
 {
     protected $table = "fasilitas";
     protected $primaryKey = "id_fasilitas";
-    protected $fillable = ['name', 'fasilitas', 'id_olahraga', 'alamat', 'kota', 'image'];
+    protected $fillable = ['id_olahraga', 'fasilitas'];
 
     public function olahraga()
     {

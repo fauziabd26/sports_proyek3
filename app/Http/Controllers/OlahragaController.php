@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Olahraga;
+use App\Http\Resources\Olahraga as OlahragaResource;
 
 class OlahragaController extends Controller
 {
     public function index()
     {
-        $olahraga = \App\Olahraga::all();
+        $olahraga = Olahraga::all();
         return view('superadmin.olahraga', ['olahraga' => $olahraga]);
     }
 
@@ -74,8 +75,8 @@ class OlahragaController extends Controller
     {
         try {
             $olahraga = Olahraga::find($id_olahraga);
-    	    $olahraga->delete();
-    	    return redirect('/olahraga')->with('alert-success','Data berhasil dihapus!');
+            $olahraga->delete();
+            return redirect('/olahraga')->with('alert-success', 'Data berhasil dihapus!');
         } catch (\Throwable $th) {
             return redirect('/olahraga')->withErrors('Data gagal Dihapus');
         }

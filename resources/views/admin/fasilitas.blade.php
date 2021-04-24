@@ -1,4 +1,4 @@
-@extends('admin.template')
+@extends('superadmin.template')
 @section('content')
 <!-- page content -->
 <div class="content-wrapper">
@@ -11,13 +11,7 @@
                             <h3 class="card-title"><a href="/fasilitas"><h2>Data Sarana</h2></a></h3>
                         </div>
                         <br>
-                        @if(count($errors) > 0)
-                  <div class="alert alert-danger">
-                    @foreach ($errors->all() as $error)
-                      {{ $error }} <br/>
-                    @endforeach
-                  </div>
-                @endif
+
                         <div class="data-tools">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-tambah">
                                 <i class="fa fa-plus"></i>  Tambah Data Sarana
@@ -29,12 +23,8 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama Sarana</th>
-                                            <th>Fasilitas</th>
                                             <th>Kategori Olahraga</th>
-                                            <th>Alamat</th>
-                                            <th>Kota</th>
-                                            <th>Gambar</th>
+                                            <th>Deskripsi</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -43,12 +33,8 @@
                                         @foreach($fasilitas as $f)
                                             <tr>
                                                 <th scope="row">{{ $no++ }}</td>
-                                                <td>{{ $f->name }}</td>
-                                                <td>{{ $f->fasilitas }}</td>
                                                 <td>{{ $f->name_olahraga }}</td>
-                                                <td>{{ $f->alamat }}</td>
-                                                <td>{{ $f->kota }}</td>
-                                                <td><img src="{{ url('images/fasilitas/'.$f->image) }}" width:"100px"></td>
+                                                <td>{{ $f->fasilitas }}</td>
                                                 <td>
                                                     <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-{{ $f->id_fasilitas }}">
                                                         <i class="fa fa-edit"></i> Edit
@@ -63,8 +49,9 @@
                                 </table>
                             </div>
                         @else
+                        <br><br>
                             <div class="alert alert-primary">
-                                <i class="fa fa-exclamation-triangle"></i> Data Sarana Belum tersedia
+                                <i class="fa fa-exclamation-triangle"></i> Data Belum tersedia
                             </div>
                         @endif
                         <br>
@@ -81,7 +68,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLabel">Tambah Data Sarana</h4>
+                <h4 class="modal-title" id="exampleModalLabel">Tambah Data</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -89,7 +76,21 @@
             <form action="/fasilitas/store"  method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="modal-body">
-                    @include('admin.form')
+                    <div class="form-group">
+                        <label class="control-label" for="id_olahraga">Kategori Olahraga</label>
+                        <select class="control-label" type="text" name="id_olahraga" style="width: 100%">
+                          <option value="">Select</option>
+                          @foreach ($fasilitas as $f)
+                            <option value="{{$f->id_olahraga}}">
+                              {{$f->name_olahraga}}
+                            </option>
+                          @endforeach
+                        </select>
+                      </div>
+                    <div class="form-group">
+                        <label class="control-label" for="fasilitas">Deskripsi</label>
+                        <textarea name="fasilitas" class="form-control" id="fasilitas" rows="3" required></textarea>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -117,17 +118,9 @@
                 {{ method_field('put') }}
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <label class="control-label" for="name">Nama Sarana</label>
-                    <input type="text" name="name" class="form-control" id="name" value="{{ $f->name }}">
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="fasilitas">Fasilitas</label>
-                    <input type="text" name="fasilitas" class="form-control" id="fasilitas" value="{{ $f->fasilitas }}">
-                </div>
-                <div class="form-group">
                     <label class="control-label" for="kategori">Kategori Olahraga</label>
                     <select class="control-label" name="id_olahraga" id="id_olahraga" style="width: 100%">
-                        @foreach ($olahraga as $o)
+                        @foreach ($fasilitas as $o)
                         <option value="{{ $o->id_olahraga }}">
                         {{$o->name_olahraga}}
                           </option>
@@ -135,24 +128,10 @@
                       </select>
                 </div>
                 <div class="form-group">
-                    <label class="control-label" for="alamat">Alamat</label>
-                    <input type="text" name="alamat" class="form-control" id="alamat" value="{{ $f->alamat }}">
+                    <label class="control-label" for="fasilitas">Deskripsi</label>
+                    <input type="text" name="fasilitas" class="form-control" id="fasilitas" value="{{ $f->fasilitas }}">
                 </div>
-                <div class="form-group">
-                    <label class="control-label" for="kota">Kota</label>
-                    <input type="text" name="kota" class="form-control" id="kota" value="{{ $f->kota }}">
-                </div>
-                <div class="row form-group">
-                    <label  class="control-label" for="text">Foto Kategori Olahraga Lama</label>
-                    <div class="col-sm-8">
-                        <td><img src="{{ url('public/images/fasilitas/'.$f->image) }}" width: "100px"></td>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="image">Upload Gambar Kategori Olahraga Baru </label>
-                    <input type="file" name="image" class="form-control">
-                </div>
-                </div>
+            </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-success">Save changes</button>
@@ -163,4 +142,4 @@
 </div>
 <!-- End Modal - EDIT -->
 @endforeach
-@endsection
+@stop
