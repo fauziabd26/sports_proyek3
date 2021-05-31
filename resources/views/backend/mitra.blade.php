@@ -177,6 +177,13 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12">Masukkan Foto Sarana Baru
+                    </label>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                      <input type="file" name="file" class="form-control">
+                    </div>
+                  </div>
+                <div class="form-group">
                     <label class="control-label" for="image">Upload Gambar Kategori Olahraga Baru </label>
                     <input type="file" name="image" class="form-control">
                 </div>

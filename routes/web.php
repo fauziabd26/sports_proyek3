@@ -80,12 +80,14 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::get('/adminpage/pitch', 'PitchController@index')->name('pitch.index');
+    Route::get('/admin/pitch', 'PitchController@indexadmin')->name('pitch.admin.index');
     Route::get('/adminpage/pitch/create', 'PitchController@create')->name('pitch.create');
     Route::post('/adminpage/pitch', 'PitchController@store')->name('pitch.store');
+    Route::post('/admin/pitch', 'PitchController@adminstore')->name('pitch.admin.store');
     Route::get('/adminpage/pitch/datatable', 'PitchController@show')->name("pitch.datatable");
     Route::get('/adminpage/pitch/{id}', 'PitchController@edit')->name("pitch.edit");
     Route::patch('/adminpage/pitch/{id}', 'PitchController@update')->name("pitch.update");
-    Route::delete('/adminpage/pitch/{id}', 'PitchController@destroy')->name("pitch.destroy");
+    Route::delete('/admindelete/pitch/{id}', 'PitchController@destroy')->name("pitch.destroy");
 
     Route::get('/adminpage/cash', 'CashController@index')->name('cash.index');
     Route::get('/adminpage/cash/create', 'CashController@create')->name('cash.create');

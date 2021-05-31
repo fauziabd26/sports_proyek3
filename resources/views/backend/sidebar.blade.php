@@ -7,17 +7,12 @@
     <ul class="nav side-menu">
       <li><a href="{{ route('dashboard') }}"> Dashboard </a></li>
       @permission('user-*')
-      <li><a> User <span class="fa fa-chevron-down"></span></a>
-        <ul class="nav child_menu">
           <li><a href="{{ route('user.index') }}">Data User</a></li>
           @permission('user-create')
-          <li><a href="{{ route('user.create') }}">Tambah User</a></li>
-        </ul>
         <li><a href="{{ route('mitra-super') }}"> Kelola Mitra </a></li>
         @endpermission
         <li><a href="{{ route('sports') }}">Kelola olahraga</a></li>
         <li><a href="{{ route('article_category.index') }}">Kelola Kategori Artikel</a></li>
-      </li>
       @endpermission
     </ul>
   </div>
@@ -71,7 +66,7 @@
     <ul class="nav side-menu">
       <li><a> Sarana <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
-          <li><a href="{{ route('pitch.index') }}">Data Sarana</a></li>
+          <li><a href="{{ route('pitch.admin.index') }}">Data Sarana</a></li>
         </ul>
       </li>
       <li><a> Booking<span class="fa fa-chevron-down"></span></a>

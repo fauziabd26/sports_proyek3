@@ -10,12 +10,12 @@
     <title>Gentallela Alela! | </title>
 
     <!-- Bootstrap -->
-    <link href="{{ asset("/assets/vendors/bootstrap/dist/css/bootstrap.min.css") }}" rel="stylesheet">
+    <link href="{{ url("/assets/vendors/bootstrap/dist/css/bootstrap.min.css") }}" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="{{ asset("/assets/vendors/font-awesome/css/font-awesome.min.css") }}" rel="stylesheet">
+    <link href="{{ url("/assets/vendors/font-awesome/css/font-awesome.min.css") }}" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    <link href="{{ asset("/assets/build/css/custom.min.css") }}" rel="stylesheet">
+    <link href="{{ url("/assets/build/css/custom.min.css") }}" rel="stylesheet">
   </head>
 
   <body class="nav-md">
@@ -24,7 +24,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentellela Alela!</span></a>
+              <a href="/adminpage/user" class="site_title"><i class="fa fa-paw"></i> <span>Gentellela Alela!</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -32,7 +32,7 @@
             <!-- menu profile quick info -->
             <div class="profile">
               <div class="profile_pic">
-                <img src="{{ asset("assets/images/img.jpg") }}" alt="..." class="img-circle profile_img">
+                <img src="{{ url("assets/images/img.jpg") }}" alt="..." class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>

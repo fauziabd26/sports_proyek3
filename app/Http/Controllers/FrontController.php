@@ -43,7 +43,7 @@ class FrontController extends Controller
         $sports = Sports::all();
         
         $data['pitches'] = DB::table('pitch as p')->join(DB::raw('(select pitch_id, min(price) as price from pitch_price group by pitch_id) as pp'),'pp.pitch_id','=','p.id')
-                            ->select('p.id','p.name','pp.price')->get();
+                            ->select('p.id','p.name','p.image','pp.price')->get();
         return view('user.home',compact('pitch','sports'))->with($data);
     }
 

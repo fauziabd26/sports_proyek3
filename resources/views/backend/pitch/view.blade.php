@@ -31,15 +31,36 @@
             <table id="table-user" class="table table-striped dt-responsive nowrap" cellspacing="0" width="100%">
               <thead>
                 <tr>
+                  <th scope="col" class="text-center">No</th>
+                  <th class="text-center">Kategori Olahraga</th>
                   <th class="text-center">Nama Lapangan</th>
+                  <th class="text-center">Nama Pemilik</th>
                   <th class="text-center">Status</th>
-                  <th class="text-center">Dibuat Oleh</th>
-                  <th class="text-center">Tgl Buat</th>
+                  <th class="text-center">Fasilitas</th>
                   <th style="width:150px;">Action</th>
                 </tr>
               </thead>
+              <?php $no = 1;?>
+              @foreach($datas as $p)
               <tbody>
+                <tr>
+                  <td class="text-center">{{ $no++ }}</td>
+                  <td class="text-center">{{ $p->name_sports }}</td>
+                  <td class="text-center">{{ $p->name }}</td>
+                  <td class="text-center">{{ $p->fullname }}</td>
+                  <td class="text-center">{{ $p->description }}</td>
+                  <td class="text-center"><img src="{{ asset('images/mitra/') }}/{{ $p->image }}" style="width: 100px;" href="{{ asset('images/mitra/') }}/{{ $p->image }}" ></td>
+                  <td class="text-center">
+                      <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-{{ $p->id }}">
+                          <i class="fa fa-edit"></i> Edit
+                      </button>
+                      <a href="mitra-hapus{{$p->id}}" class="btn btn-danger btn-sm" onclick="return confirm('Anda yakin mau menghapus item ini ?')">
+                          <i class="fas fa-trash"></i> Delete
+                      </a>
+                  </td>
+              </tr>
               </tbody>
+              @endforeach
             </table>
         </div>
       </div>
@@ -162,18 +183,4 @@
     <script src="{{ asset("/assets/backend/vendors/jszip/dist/jszip.min.js") }}"></script>
     <script src="{{ asset("/assets/backend/vendors/pdfmake/build/pdfmake.min.js") }}"></script>
     <script src="{{ asset("/assets/backend/vendors/pdfmake/build/vfs_fonts.js") }}"></script>
-    <script type="text/javascript">
-        $('#table-user').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: '{{ route("pitch.datatable") }}',
-            columns: [
-                {data: 'name', name: 'name'},
-                {data: 'isactive', name: 'pitch.isactive', className: 'text-center'},
-                {data: 'username', name: 'username', className: 'text-center'},
-                {data: 'created_at', name: 'pitch.created_at', className: 'text-center'},
-                {data: 'id', name: 'action', orderable: false, searchable: false, className: 'text-center'}
-            ]
-        });
-    </script>
 @endsection

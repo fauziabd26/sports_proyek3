@@ -86,7 +86,7 @@ _________________________________________________________ -->
                     <div class="box-image-text blog">
                         <div class="top">
                             <div class="image">
-                                <img src="{{ asset("/assets/front/img/portfolio-1.jpg")}}" alt="" class="img-responsive">
+                                <img src="{{ asset('images/mitra/') }}/{{ $pitch->image }}" alt="" class="img-responsive">
                             </div>
                         </div>
                         <div class="content">
