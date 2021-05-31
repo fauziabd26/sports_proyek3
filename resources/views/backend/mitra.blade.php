@@ -42,6 +42,7 @@
                                             <th class="text-center">Alamat</th>
                                             <th class="text-center">Kota</th>
                                             <th class="text-center">Nomor Telephone</th>
+                                            <th class="text-center">Foto Mitra</th>
                                             <th class="text-center">Actions</th>
                                         </tr>
                                     </thead>
@@ -65,6 +66,7 @@
                                         </tbody>
                                     @endforeach
                                 </table>
+                                
                             </div>
                         @else
                         <br><br>
@@ -73,6 +75,7 @@
                                 <i class="fa fa-plus"></i>  Tambah Mitra
                             </a>
                             <h4>Note : Mitra Hanya bisa daftar sekali saja</h4>
+                            
                         </div>
                         @endif
                         <br>
@@ -97,6 +100,9 @@
             <form action="/mitra-admin/store"  method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" name="" class="form-control" id="id_user" placeholder="Nama Pemilik" value="{{auth()->user()->id}}" disabled>
+                    </div>
                     <div class="form-group">
                         <input type="text" name="nama_mitra" class="form-control" id="nama_mitra" placeholder="Nama Mitra" required>
                     </div>
@@ -161,7 +167,7 @@
                     <input type="text" name="kota" class="form-control" id="kota" value="{{ $m->kota }}">
                 </div>
                 <div class="form-group">
-                    <label class="control-label" for="kota">Nomor Telephone</label>
+                    <label class="control-label" for="phone">Nomor Telephone</label>
                     <input type="text" name="phone" class="form-control" id="phone" value="{{ $m->phone }}" required>
                 </div>
                 <div class="row form-group">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Mitra;
@@ -16,7 +17,8 @@ class MitraController extends Controller
      */
     public function index()
     {
-        $mitra = Mitra::all();
+        $mitra = Mitra::where('id_user', Auth::user()->id)->get();
+
         return view('backend.mitra', ['mitra' => $mitra]);
     }
 
@@ -64,7 +66,9 @@ class MitraController extends Controller
         $mitra->deskripsi   = $request->deskripsi;
         $mitra->alamat      = $request->alamat;
         $mitra->kota        = $request->kota;
-        $mitra->phone        = $request->phone;
+        $mitra->phone       = $request->phone;
+        $mitra->id_user     = Auth::user()->id;
+
 
         $image              = $request->file('file');
         $imageName          = time() . "_" . $image->getClientOriginalName();

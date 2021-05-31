@@ -31,11 +31,10 @@
                     <label class="control-label col-md-2 col-sm-2 col-xs-12">Tipe User</label>
                     <div class="col-md-4 col-sm-4 col-xs-12">
                       <div id="role" class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-default @if($user->role == 'admin') active @endif" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                          <input type="radio" name="role" value="admin" required="" @if($user->role == 'admin') checked  @endif >Administrator
-                        </label>
                         <label class="btn btn-default @if($user->role == 'agent') active @endif" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                          <input type="radio" name="role" value="agent" @if($user->role == 'agent') checked @endif> Agent
+                          <input type="radio" name="role" value="calonadmin" @if($user->role == 'operator') checked @endif> Calon Admin
+                        </label><label class="btn btn-default @if($user->role == 'admin') active @endif" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                          <input type="radio" name="role" value="admin" required="" @if($user->role == 'admin') checked  @endif >Admin
                         </label>
                         <label class="btn btn-default @if($user->role == 'member') active @endif" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
                           <input type="radio" name="role" value="member" @if($user->role == 'member') checked @endif> Member

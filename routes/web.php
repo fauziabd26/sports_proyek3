@@ -30,31 +30,31 @@ Route::get('/order/detail/{id}', 'FrontController@detail_order')->name('front.de
 Route::post('/confirm', 'FrontController@confirm')->name('front.confirm');
 
 Route::post('/adminpage/login', 'UserController@login')->name('user.login');
-
+Route::post('/registeradmin/store', 'UserController@adminstore')->name('admin.store');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/adminpage/dashboard', 'DashboardadminController@index')->name('dashboard');
 
     Route::get('/adminpage/user/change_password', 'UserController@edit_pass')->name('user.edit_pass');
     Route::post('/adminpage/user/update_password', 'UserController@update_pass')->name('user.update_pass');
-    Route::group(['middleware' => ['permission:user-*']], function() {
+    Route::group(['middleware' => ['permission:user-*']], function () {
         Route::get('/adminpage/user', 'UserController@index')->name('user.index');
-        Route::group(['middleware' => ['permission:user-create']], function() {
+        Route::group(['middleware' => ['permission:user-create']], function () {
             Route::get('/adminpage/user/create', 'UserController@create')->name('user.create');
             Route::post('/adminpage/user', 'UserController@store')->name('user.store');
         });
         Route::get('/adminpage/user/datatable', 'UserController@show')->name("user.datatable");
-        Route::group(['middleware' => ['permission:user-edit']], function() {
+        Route::group(['middleware' => ['permission:user-edit']], function () {
             Route::patch('/adminpage/user/{id}', 'UserController@update')->name("user.update");
             Route::get('/adminpage/user/{id}', 'UserController@edit')->name("user.edit");
         });
-        Route::group(['middleware' => ['permission:user-delete']], function() {
+        Route::group(['middleware' => ['permission:user-delete']], function () {
             Route::delete('/adminpage/user/{id}', 'UserController@destroy')->name("user.destroy");
         });
     });
     Route::get('/adminpage/logout', 'UserController@logout')->name('user.logout');
     Route::get('/logout', 'UserController@logout_member')->name('front.logout');
 
-    Route::group(['middleware' => ['permission:article-*']], function() {
+    Route::group(['middleware' => ['permission:article-*']], function () {
         Route::get('/adminpage/article', 'ArticleController@index')->name('article.index');
         Route::get('/adminpage/article/create', 'ArticleController@create')->name('article.create');
         Route::post('/adminpage/article', 'ArticleController@store')->name('article.store');
@@ -64,7 +64,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::delete('/adminpage/article/{id}', 'ArticleController@destroy')->name("article.destroy");
     });
 
-    Route::group(['middleware' => ['permission:category-*']], function() {
+    Route::group(['middleware' => ['permission:category-*']], function () {
         Route::get('/adminpage/article_category', 'ArticleCategoryController@index')->name('article_category.index');
         Route::get('/adminpage/article_category/create', 'ArticleCategoryController@create')->name('article_category.create');
         Route::post('/adminpage/article_category', 'ArticleCategoryController@store')->name('article_category.store');
@@ -74,7 +74,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::delete('/adminpage/article_category/{id}', 'ArticleCategoryController@destroy')->name("article_category.destroy");
     });
 
-    Route::group(['middleware' => ['permission:setting-*']], function() {
+    Route::group(['middleware' => ['permission:setting-*']], function () {
         Route::get('/adminpage/setting', 'SettingController@index')->name('setting.index');
         Route::post('/adminpage/setting', 'SettingController@store')->name('setting.store');
     });

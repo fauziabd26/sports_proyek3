@@ -27,7 +27,7 @@
                   {{ session('response_message') }}
               </div>
             @endif
-            <a class="btn btn-primary" style="margin-bottom: 10px;" href="{{ route('user.create') }}"><i class="fa fa-plus-circle"></i> Tambah User</a>
+            <a class="btn btn-primary" style="margin-bottom: 10px;" data-toggle="modal" data-target="#modal-tambah"><i class="fa fa-plus-circle"></i> Tambah User</a>
             <table id="table-user" class="table table-striped dt-responsive nowrap" cellspacing="0" width="100%">
               <thead>
                 <tr>
@@ -47,6 +47,98 @@
     </div>
   </div>
 </div>
+<!-- Modal Tambah -->
+<div class="modal fade" id="modal-tambah" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">Tambah User</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {{ Form::open(array('route' => array('user.store'), 'method' => 'post', 'id' => 'formuser', 'class' => 'form-horizontal form-label-left', 'autocomplete' => 'false')) }}
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-2 col-xs-12">Tipe User</label>
+              <div class="">
+                <div id="role" class="btn-group" data-toggle="buttons">
+                  <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                    <input type="radio" name="role" value="calonadmin"> Calon Admin
+                  </label>
+                  <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                    <input type="radio" name="role" value="admin" required="">Admin
+                  </label>
+                  <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                    <input type="radio" name="role" value="member"> Penyewa
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-4 col-xs-12" for="first-name">Nama Lengkap <span class="required">*</span>
+              </label>
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <input type="text" name="fullname" class="form-control" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="middle-name" class="control-label col-md-2 col-sm-2 col-xs-12">Username <span class="required">*</span></label>
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <input class="form-control" type="text" name="username" placeholder="Min. 4 characters" data-parsley-minlength="4" data-parsley-trigger="keyup" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="middle-name" class="control-label col-md-2 col-sm-2 col-xs-12">Email <span class="required">*</span></label>
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <input class="form-control" type="email" name="email" placeholder="ex: example@admin.com" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-2 col-xs-12">No. Telepon
+              </label>
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <input name="phone" class="form-control" placeholder="ex: 08564632xxx" type="text" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-2 col-xs-12">Status
+              </label>
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <div id="status" class="btn-group" data-toggle="buttons">
+                  <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                    <input type="radio" name="isactive" value="1" required> Aktif
+                  </label>
+                  <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                    <input type="radio" name="isactive" value="0"> Non Aktif
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-2 col-xs-12">Password
+              </label>
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <input id="password" name="password" class="form-control" placeholder="min 6 characters" required="required" type="password" minlength="6">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-2 col-sm-2 col-xs-12">Konfirmasi Password
+              </label>
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <input name="confirmpassword" class="date-picker form-control" placeholder="min 6 characters" required="required" type="password" data-parsley-equalto="#password">
+              </div>
+            </div>
+          
+          <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-2">
+              <button type="submit" class="btn btn-success"><i class="fa fa-floppy-o"></i> Submit</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times-circle"></i> Close </button>
+            </div>
+          </div>
+        {{ Form::close() }}
+        </div>
+    </div>
+</div>
+<!-- End Modal - Tambah -->
 @endsection
 
 @section('javascript')

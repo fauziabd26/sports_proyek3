@@ -385,46 +385,32 @@
                     </button>
                 </div>      
                 <div class="modal-body">
-                    <p class="login-box-msg">Register a new membership</p>
-                        <form action="/registeradmin/store" method="post" enctype="multipart/form-data">
-                          @csrf
-                          <div class="input-group mb-3">
-                            <input type="text" class="form-control" name="nama_admin" placeholder="Nama Pemilik" required>
-                          </div>
-                          <div class="input-group mb-3">
-                            <input type="email" class="form-control" name="email" placeholder="Email" required>
-                              @if ($errors->has('email'))
-                                <span style="color: red"><p class="text-right">* {{ $errors->first('email') }}</p></span>
-                              @endif
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="password" class="form-control" name="password" placeholder="Password" required>
-                        </div>
-                        <div class="input-group mb-3">
-                          <select class="form-control" type="text" name="jk" style="width: 100%" id="jk" required>
-                              <option disabled="" selected="">Jenis Kelamin</option>
-                              <option value="Laki-Laki">Laki-Laki</option>
-                              <option value="Perempuan">Perempuan</option>
-                            </select>
-                        </div>
-                        <div class="input-group mb-3">
-                            <input type="number" class="form-control" name="no_hp" placeholder="Nomor Telepon" required>
-                        </div>
-                        <div class="input-group mb-3">
-                          <textarea input type="text" class="form-control" name="alamat" placeholder="Alamat" rows="3" required></textarea>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label" for="foto_admin">Upload Gambar</label>
-                        <input type="file" name="foto_admin" class="form-control" required>
+                    <p class="login-box-msg">Register a new Mitra</p>
+                    {{ Form::open(array('route' => array('admin.store'), 'method' => 'post', 'id' => 'formuser', 'class' => '', 'autocomplete' => 'false')) }}
+                    <div class="form-group">
+                        <label for="name-login">Nama Lengkap</label>
+                        <input type="text" name="fullname" class="form-control" required>
                     </div>
-                    <div>
-                      <input type="hidden" name="role" value="calon admin">
-                    </div>  
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-success">Register</button>
-                        </div>
-                    </form>
+                    <div class="form-group">
+                        <label for="name-login">Username</label>
+                        <input type="text" name="username" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email-login">Email</label>
+                        <input type="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password-login">Password</label>
+                        <input type="password" name="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="password-login">Konfirmasi Password</label>
+                        <input type="password" name="conpassword" class="form-control" >
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-template-main"><i class="fa fa-user-md"></i> Register</button>
+                    </div>
+                {{ Form::close() }}
                   </div>
                 </div>
             </div>
