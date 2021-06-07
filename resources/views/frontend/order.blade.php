@@ -1,4 +1,4 @@
-@extends('frontend.template')
+@extends('user.template_lap')
 
 @section('css')
 @endsection

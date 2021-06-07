@@ -58,7 +58,9 @@
                                                 <td class="text-center">{{ $p->description }}</td>
                                                 <td class="text-center"><img src="{{ asset('images/sarana/') }}/{{ $p->image }}" style="width: 100px;" href="{{ asset('images/mitra/') }}/{{ $p->image }}" ></td>
                                                 <td class="text-center">
-                                                    <a href="/adminpage/pitch/{$p->id}" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i> Edit</a>
+                                                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#modal-edit-{{ $p->id}}">
+                                                        <i class="fa fa-edit"></i> Edit
+                                                    </button>
                                                     {{ Form::open(array('route' => array('pitch.destroy', 'id' => $p->id), 'method' => 'delete', 'style' => 'display:inline;')) }}
                                                     <button type="submit" onclick="confirm(\'Apakah anda ingin menghapus data ini?\')" class="btn btn-xs btn-danger"><i class="fa fa-trash-o"></i> Hapus</button>
                                                     {{ Form::close() }}
@@ -112,7 +114,7 @@
                         <div class="col-md-9 col-sm-8 col-xs-12">
                         <select name="id_sports" id="sports" class="form-control">
                             <option disabled="" selected="" value="">Pilih Kategori</option>
-                            @foreach($pitch as $p)
+                            @foreach($sports as $p)
                             <option value="{{$p->id_sports}}">{{$p->name_sports}}</option>
                             @endforeach
                         </select>
@@ -186,6 +188,105 @@
     </div>
 </div>
 <!-- End Modal - Tambah -->
+@foreach ($pitch as $p)
+<!-- Modal EDIT -->
+<div class="modal fade" id="modal-edit-{{ $p->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">Edit Sarana</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('pitch.admin.edit',$p->id) }}"  method="POST" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+            <div class="form-group">
+                <label class="control-label col-md-2 col-sm-4 col-xs-12" for="first-name" disabled>Nama Pemilik
+                </label>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                <input type="text" name="" class="form-control" id="user_id" value="{{auth()->user()->fullname}}" disabled>
+                </div>
+            </div>
+                <div class="form-group">
+                    <label class="control-label" for="name">Nama Lapangan</label>
+                    <input type="text" name="name" class="form-control" id="name" value="{{ $p->name }}">
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class="control-label col-md-3 col-sm-2 col-xs-15">Kategori</label>
+                        <div class="col-md-9 col-sm-8 col-xs-12">
+                        <select name="id_sports" id="sports" class="form-control">
+                            <option disabled="" selected="" value="">Pilih Kategori</option>
+                            @foreach($sports as $p)
+                            <option value="{{$p->id_sports}}">{{$p->name_sports}}</option>
+                            @endforeach
+                        </select>
+                        </div>                     
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="description">Deskripsi</label>
+                    <input type="text" name="description" class="form-control" id="description" value="{{ $p->description }}">
+                </div>
+                <div class="row form-group">
+                    <label  class="control-label" for="text">Foto Sarana Lama</label>
+                    <div class="col-sm-8">
+                        <img src="{{ asset('images/sarana') }}/{{$p->image }}" style="width: 100px;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12">Masukkan Foto Sarana Baru
+                    </label>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                      <input type="file" name="file" class="form-control">
+                    </div>
+                  </div>
+            </div>
+            <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12">Status*</label>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                      <div id="status" class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                          <input type="radio" name="isactive" value="1" required> Aktif
+                        </label>
+                        <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                          <input type="radio" name="isactive" value="0"> Non Aktif
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <table class="table table-stripped">
+                      <thead>
+                        <tr>
+                          <th class="text-center">Jam</th>
+                          <th class="text-center">Harga</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @for($i = 0; $i < 24; $i++)
+                          <tr>
+                            <td class="text-center">@if($i<10)0{{ $i }}@else{{ $i }}@endif:00</td>
+                            <td>
+                              <div class="input-group">
+                                <div class="input-group-addon">Rp</div>
+                                <input type="number" name="price[]" min="0" class="form-control" value="0" required/>
+                              </div>
+                            </td>
+                          </tr>
+                        @endfor
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- End Modal - EDIT -->
+@endforeach
 @endsection
 @section('js')
 <script>

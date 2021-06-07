@@ -1,4 +1,4 @@
-@extends('frontend.template')
+@extends('user.template_lap')
 
 @section('css')
 <link href="{{ asset("/assets/backend/vendors/bootstrap-datepicker/css/bootstrap-datepicker.min.css") }}" rel="stylesheet">
@@ -186,14 +186,6 @@
                                     <div class="form-group dis-transfer">
                                         <label class="label-control">Nama Pemilik Rekening</label>
                                         <input type="text" name="account_name" class="form-control" required/>
-                                    </div>
-                                    <div class="form-group dis-transfer">
-                                        <label class="label-control">Nominal</label>
-                                        <div class="input-group">
-                                            <div class="input-group-addon">Rp</div>
-                                            <input type="text" data-v-min="{{ $mindp }}" name="amount" class="form-control" value="{{ $mindp }}" required/>
-                                        </div>
-                                        <span class="text text-info">Minimal DP adalah Rp {{ number_format($mindp) }}</span>
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-template-main">Konfirmasi Pembayaran</button>

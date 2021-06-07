@@ -50,8 +50,7 @@
               <li class="nav-item"><a href="#home" class="nav-link" title="home">Home</a></li>
               <li class="nav-item"><a class="nav-link" href="#olahraga" title="olahraga">Olahraga</a></li>
               <li class="nav-item"><a class="nav-link" href="#sarana" title="sarana">Sarana</a></li>
-              <li class="nav-item"><a class="nav-link" href="#artikel" title="artikel">Artikel & Tips</a></li>
-              <li class="nav-item"><a class="nav-link" href="#contact" title="contact">Contact</a></li>
+              <li class="nav-item"><a class="nav-link" href="#news" title="artikel">Sarana</a></li>
               <li class="nav-item cta"><a href="/login" class="nav-link" data-toggle="modal" data-target="#modal-login"><span>Login</span></a></li>
               <li class="nav-item cta"><a href="/register" class="nav-link" data-toggle="modal" data-target="#modal-register"><span>register</span></a></li>
             
@@ -61,7 +60,7 @@
 
       </nav>
         <!-- END nav -->
-        <section id="home" class="ftco-section services-section bg-light">
+  <section id="home" class="ftco-section services-section bg-light">
     <div class="hero-wrap js-fullheight" style="background-image: url('sports/images/bg.jpeg');">
       <div class="overlay"></div>
       <div class="container">
@@ -133,6 +132,38 @@
         </div>
     </section>
 
+    <section id="news"class="ftco-section ftco-destination">
+      <div class="container">
+        <div class="row justify-content-start mb-5 pb-3">
+          <div class="col-md-7 heading-section ftco-animate">
+            <span class="subheading">Recent Blog</span>
+            <h2><strong>Tips</strong> &amp; Articles</h2>
+          </div>
+        </div>
+        <div class="row d-flex">
+          @foreach($articles as $article)
+          <div class="col-md-3 d-flex ftco-animate">
+            <div class="blog-entry align-self-stretch">
+              <div class="text p-4 d-block">
+              	
+                <span class="tag">{{ $article->title }}</span>
+                <h3 class="heading mt-3"><a href="#">{!! $article->content !!}</a></h3>
+                <div class="meta mb-3">
+                  <div><p class="date-comments">
+                    <a href="#"><i class="fa fa-calendar-o"></i> {{ date("d F Y",strtotime($article->created_at)) }}</a>
+                </p></div>
+                  <div><p class="author-category">By <a href="#">{{ $article->fullname }}</a> in <a href="#">{{ $article->name }}</a>
+                  </p></br></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          @endforeach
+        </div>
+        {{ $articles->links() }}
+      </div>
+      </section>
+
     <section id="sarana"class="bg-light ftco-section ftco-destination">
         <div class="container">
             <div class="row justify-content-start mb-5 pb-3">
@@ -152,7 +183,7 @@
                                     <h3 class="card-text"><strong>Olahraga : </strong>{{ $f->name_sports }}<br><strong>Deskripsi : </strong>{{ $f->description }}<br></h3>
                                 </div>
                                 <div class="card-footer">
-                                    <a href="/pemesanan" class="btn btn-primary" class="fa fa-shopping-cart">Pesan Sekarang</a>
+                                    <a href="{{ route('front.detail',$f->id) }}" class="btn btn-primary" class="fa fa-shopping-cart">Pesan Sekarang</a>
                                   </div>
                             </div>
                         </div>
@@ -162,126 +193,6 @@
             </div>
         </div>
     </section>
-
-    <section id="artikel" class="ftco-section">
-        <div class="container">
-          <div class="row justify-content-start mb-5 pb-3">
-            <div class="col-md-7 heading-section ftco-animate">
-              <span class="subheading">Recent Blog</span>
-              <h2><strong>Tips</strong> &amp; Articles</h2>
-            </div>
-          </div>
-          <div class="row d-flex">
-            <div class="col-md-3 d-flex ftco-animate">
-              <div class="blog-entry align-self-stretch">
-                <a href="blog-single.html" class="block-20" style="background-image: url('sports/images/image_1.jpg');">
-                </a>
-                <div class="text p-4 d-block">
-                    <span class="tag">Tips, Travel</span>
-                  <h3 class="heading mt-3"><a href="#">8 Best homestay in Philippines</a></h3>
-                  <div class="meta mb-3">
-                    <div><a href="#">August 12, 2018</a></div>
-                    <div><a href="#">Admin</a></div>
-                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3 d-flex ftco-animate">
-              <div class="blog-entry align-self-stretch">
-                <a href="blog-single.html" class="block-20" style="background-image: url('sports/images/image_2.jpg');">
-                </a>
-                <div class="text p-4">
-                    <span class="tag">Culture</span>
-                  <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  <div class="meta mb-3">
-                    <div><a href="#">August 12, 2018</a></div>
-                    <div><a href="#">Admin</a></div>
-                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3 d-flex ftco-animate">
-              <div class="blog-entry align-self-stretch">
-                <a href="blog-single.html" class="block-20" style="background-image: url('sports/images/image_3.jpg');">
-                </a>
-                <div class="text p-4">
-                    <span class="tag">Tips, Travel</span>
-                  <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  <div class="meta mb-3">
-                    <div><a href="#">August 12, 2018</a></div>
-                    <div><a href="#">Admin</a></div>
-                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3 d-flex ftco-animate">
-              <div class="blog-entry align-self-stretch">
-                <a href="blog-single.html" class="block-20" style="background-image: url('sports/images/image_4.jpg');">
-                </a>
-                <div class="text p-4">
-                    <span class="tag">Tips, Travel</span>
-                  <h3 class="heading mt-3"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                  <div class="meta mb-3">
-                    <div><a href="#">August 12, 2018</a></div>
-                    <div><a href="#">Admin</a></div>
-                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="contact" class="ftco-section contact-section ftco-degree-bg bg-light">
-        <div class="container">
-          <div class="row d-flex mb-5 contact-info">
-            <div class="col-md-12 mb-4">
-              <h2 class="h4">Contact Information</h2>
-            </div>
-            <div class="w-100"></div>
-            <div class="col-md-3">
-              <p><span>Address:</span> 198 West 21th Street, Suite 721 New York NY 10016</p>
-            </div>
-            <div class="col-md-3">
-              <p><span>Phone:</span> <a href="tel://1234567920">+ 1235 2355 98</a></p>
-            </div>
-            <div class="col-md-3">
-              <p><span>Email:</span> <a href="mailto:info@yoursite.com">info@yoursite.com</a></p>
-            </div>
-            <div class="col-md-3">
-              <p><span>Website</span> <a href="#">yoursite.com</a></p>
-            </div>
-          </div>
-          <div class="row block-9">
-            <div class="col-md-6 pr-md-5">
-              <form action="#">
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Your Name">
-                </div>
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Your Email">
-                </div>
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Subject">
-                </div>
-                <div class="form-group">
-                  <textarea name="" id="" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
-                </div>
-                <div class="form-group">
-                  <input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
-                </div>
-              </form>
-
-            </div>
-
-            <div class="col-md-6" id="map"></div>
-          </div>
-        </div>
-      </section>
 
       <section class="ftco-section-parallax">
         <div class="parallax-img d-flex align-items-center">
@@ -334,6 +245,11 @@
                         <label for="password-login">Konfirmasi Password</label>
                         <input type="password" name="conpassword" class="form-control" >
                     </div>
+                    
+                    <div class="form-group">
+                      <label for="phone">No. Telepon</label>
+                      <input type="number" name="phone" class="form-control" required>
+                  </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-template-main"><i class="fa fa-user-md"></i> Register</button>
                     </div>
@@ -407,6 +323,10 @@
                         <label for="password-login">Konfirmasi Password</label>
                         <input type="password" name="conpassword" class="form-control" >
                     </div>
+                    <div class="form-group">
+                      <label for="phone">No. Telepon</label>
+                      <input type="number" name="phone" class="form-control" required>
+                  </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-template-main"><i class="fa fa-user-md"></i> Register</button>
                     </div>

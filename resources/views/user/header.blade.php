@@ -9,17 +9,8 @@ _________________________________________________________ -->
                             <div class="nav_menu">
                                 <nav class="" role="navigation">
                                     <ul class="nav navbar-nav navbar-right">
-                                        <li class="">
-                                            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                <i class="fa fa-user"></i> {{ Auth::user()->fullname }}
-                                                <span class=" fa fa-angle-down"></span>
-                                            </a>
-                                            <ul class="dropdown-menu dropdown-usermenu pull-right">
-                                                <li><a href="javascript:;"><i class="fa fa-user pull-left"></i> Profile</a></li>
-                                                <li><a href="{{ route('user.edit_pass') }}"><i class="fa fa-key pull-left"></i> Ubah Password</a></li>
-                                                <li><a href="{{ route('front.logout') }}"><i class="fa fa-sign-out pull-left"></i> Log Out</a></li>
-                                            </ul>
-                                        </li>
+                                        <a href="{{ route('front.order') }}"><i class="fa fa-user"></i> <span class="hidden-xs text-uppercase">{{ Auth::user()->username }}</span></a>
+                                        <a href="{{ route('front.logout') }}"><i class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Logout</span></a>
                                     </ul>
                                 </nav>
                             </div>
@@ -57,16 +48,7 @@ _________________________________________________________ -->
 
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="">
-                                    <a href="{{ route('front.home') }}">Home</a>
-                                </li>
-                                <li class="">
-                                    <a href="{{ route('front.about') }}">Tentang Kami</a>
-                                </li>
-                                <li class="">
-                                    <a href="{{ route('front.news') }}">Berita</a>
-                                </li>
-                                <li class="">
-                                    <a href="{{ route('front.contact') }}">Kontak</a>
+                                    <a href="{{ route('front.user.home') }}">Home</a>
                                 </li>
                             </ul>
 

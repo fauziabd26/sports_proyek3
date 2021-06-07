@@ -6,6 +6,8 @@ use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Mitra;
+use App\User;
+use App\Pitch;
 use App\Http\Resources\Mitra as MitraResource;
 
 class MitraController extends Controller
@@ -24,8 +26,12 @@ class MitraController extends Controller
 
     public function super()
     {
-        $mitra = Mitra::all();
-        return view('backend.mitra-super', ['mitra' => $mitra]);
+        $mitra = DB::table('mitra')
+            ->join('user', 'user.id', '=', 'mitra.id_user')
+            ->select('user.*', 'mitra.*')
+            ->get();
+        
+        return view('backend.mitra-super', compact('mitra','user'));
     }
     /**
      * Show the form for creating a new resource.

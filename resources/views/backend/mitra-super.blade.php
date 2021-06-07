@@ -13,7 +13,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title"><a href="/olahraga"><h2>Kategori Olahraga</h2></a></h3>
+                            <h3 class="card-title"><a href="/mitra-super"><h2>Kelola Mitra</h2></a></h3>
                         </div>
                         <br>
                         <div class="card-body">
@@ -29,11 +29,6 @@
                             <strong>{{ $message }}</strong>
                         </div>
                         @endif
-                        <div class="data-tools">
-                            <a class="btn btn-primary" class="btn btn-primary" data-toggle="modal" data-target="#modal-tambah" style="margin-bottom: 10px;">
-                                <i class="fa fa-plus"></i>  Tambah Kategori
-                            </a>
-                        </div>
                         @if(count($mitra))
 
                                 <table id="example2" class="table table-bordered table-hover">
@@ -41,6 +36,7 @@
                                         <tr>
                                             <th scope="col" class="text-center">No</th>
                                             <th class="text-center">Nama Mitra</th>
+                                            <th class="text-center">Nama Pemilik</th>
                                             <th class="text-center">Fasilitas</th>
                                             <th class="text-center">Alamat</th>
                                             <th class="text-center">Kota</th>
@@ -55,6 +51,7 @@
                                             <tr>
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{ $m->nama_mitra }}</td>
+                                                <td>{{ $m->fullname }}</td>
                                                 <td>{{ $m->deskripsi }}</td>
                                                 <td>{{ $m->alamat }}</td>
                                                 <td>{{ $m->kota }}</td>
@@ -65,7 +62,7 @@
                                                         <i class="fa fa-edit"></i> Edit
                                                     </button>
                                                     <a href="mitra-hapus{{$m->id_mitra}}" class="btn btn-danger btn-sm" onclick="return confirm('Anda yakin mau menghapus item ini ?')">
-                                                        <i class="fas fa-trash"></i> Delete
+                                                        <i class="fa fa-trash"></i> Delete
                                                     </a>
                                                 </td>
                                             </tr>
@@ -85,55 +82,6 @@
     </section>
 </div>
 <!-- /--Content Header (Page header) -->
-
-<!-- Modal Tambah -->
-<div class="modal fade" id="modal-tambah" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLabel">Tambah Kategori Olahraga</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form action="/mitra-admin/mitrastore"  method="POST" enctype="multipart/form-data">
-                {{ csrf_field() }}
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label class="control-label">Nama Mitra</label>
-                        <input type="text" name="nama_mitra" class="form-control" id="nama_mitra" placeholder="Nama Mitra" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Deskripsikan Fasilitas</label>
-                        <textarea name="deskripsi" class="form-control" id="deskripsi" placeholder="Deskripsikan Fasilitas" rows="3" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Alamat</label>
-                        <textarea name="alamat" class="form-control" id="alamat" placeholder="Alamat" rows="3" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Kota</label>
-                        <input type="text" name="kota" class="form-control" id="kota" placeholder="Kota" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Nomor Telephone</label>
-                        <input type="text" name="phone" class="form-control" id="phone" placeholder="Nomor Telephone" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="file">Upload Gambar</label>
-                        <input type="file" name="file" class="form-control" required>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success">Save</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<!-- End Modal - Tambah -->
-
 
 
 @foreach ($mitra as $m)

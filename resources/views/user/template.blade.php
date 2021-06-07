@@ -1,90 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
+    <title>User | Sports</title>
     <meta charset="utf-8">
-    <meta name="robots" content="all,follow">
-    <meta name="googlebot" content="index,follow,snippet,archive">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alex+Brush" rel="stylesheet">
 
-    <title>Sports</title>
+    <link rel="stylesheet" href="sports/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="sports/css/animate.css">
+    
+    <link rel="stylesheet" href="sports/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="sports/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="sports/css/magnific-popup.css">
 
-    <meta name="keywords" content="">
+    <link rel="stylesheet" href="sports/css/aos.css">
 
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,500,700,800' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="sports/css/ionicons.min.css">
 
-    <!-- Bootstrap and Font Awesome css -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="sports/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="sports/css/jquery.timepicker.css">
 
-    <!-- Css animations  -->
-    <link href="{{ asset("/assets/front/css/animate.css") }}" rel="stylesheet">
-
-    <!-- Theme stylesheet, if possible do not edit this stylesheet -->
-    <link href="{{ asset("/assets/front/css/style.default.css") }}" rel="stylesheet" id="theme-stylesheet">
-
-    <!-- Custom stylesheet - for your changes -->
-    <link href="{{ asset("/assets/front/css/custom.css") }}" rel="stylesheet">
-
-    <!-- Responsivity for older IE -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
-
-    <!-- Favicon and apple touch icons-->
-    <link rel="shortcut icon" href="{{ asset("/assets/front/img/favicon.ico")}}" type="image/x-icon" />
-    <link rel="apple-touch-icon" href="{{ asset("/assets/front/img/apple-touch-icon.png") }}" />
-    <link rel="apple-touch-icon" sizes="57x57" href="{{ asset("/assets/front/img/apple-touch-icon-57x57.png") }}" />
-    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset("/assets/front/img/apple-touch-icon-72x72.png") }}" />
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ asset("/assets/front/img/apple-touch-icon-76x76.png") }}" />
-    <link rel="apple-touch-icon" sizes="114x114" href="{{ asset("/assets/front/img/apple-touch-icon-114x114.png") }}" />
-    <link rel="apple-touch-icon" sizes="120x120" href="{{ asset("/assets/front/img/apple-touch-icon-120x120.png") }}" />
-    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset("/assets/front/img/apple-touch-icon-144x144.png") }}" />
-    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset("/assets/front/img/apple-touch-icon-152x152.png") }}" />
-    <!-- owl carousel css -->
-
+    
+    <link rel="stylesheet" href="sports/css/flaticon.css">
+    <link rel="stylesheet" href="sports/css/icomoon.css">
+    <link rel="stylesheet" href="sports/css/style.css">
     <link href="{{ asset("/assets/front/css/owl.carousel.css")}}" rel="stylesheet">
     <link href="{{ asset("/assets/front/css/owl.theme.css")}}" rel="stylesheet">
 
-    @yield('css')
+  </head>
+  <body>
+    
+  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Sports</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="oi oi-menu"></span> Menu
+      </button>
 
-</head>
-
-<body>
-
-    <div id="all">
-
-    @include('user.header')
-
-    @yield('content')
-
-    @include('user.footer')
-
+      <div class="collapse navbar-collapse" id="ftco-nav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a href="/homeuser" class="nav-link">Home</a></li>
+          <li class="dropdown nav-item cta">
+            <a class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-user"></i> {{ Auth::user()->fullname }}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="{{ route('user.edit_pass') }}">Update Password</a></li>
+              <li><a class="dropdown-item" href="{{ route('front.logout') }}">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
     </div>
-    <!-- /#all -->
+  </nav>
+    <!-- END nav -->
+    <section class="ftco-section ftco-degree-bg">
+    @show
+    @yield('content')
+    </section>
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+        <div class="container">
+          <div class="row mb-5">
+            <div class="col-md">
+              <div class="ftco-footer-widget mb-4">
+                <h2 class="ftco-heading-2">Sports</h2>
+                <p>Aplikasi web yang menyediakan layanan pemesanan semua sarana olahraga kesehatan.</p>
+                <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                  <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                  <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                  <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="ftco-footer-widget mb-4 ml-md-5">
+                <h2 class="ftco-heading-2">Information</h2>
+                <ul class="list-unstyled">
+                  <li><a href="#" class="py-2 d-block">Artikel & Tips</a></li>
+                  <li><a href="#" class="py-2 d-block">Daftarkan Mitra Anda</a></li>
+                  <li><a href="#" class="py-2 d-block">Terms and Conditions</a></li>
+                  <li><a href="#" class="py-2 d-block">Privacy and Policy</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md">
+               <div class="ftco-footer-widget mb-4">
+                <h2 class="ftco-heading-2">Customer Support</h2>
+                <ul class="list-unstyled">
+                  <li><a href="#" class="py-2 d-block">FAQ</a></li>
+                  <li><a href="#" class="py-2 d-block">Payment Option</a></li>
+                  <li><a href="#" class="py-2 d-block">Booking Tips</a></li>
+                  <li><a href="#" class="py-2 d-block">How it works</a></li>
+                  <li><a href="#" class="py-2 d-block">Contact Us</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="ftco-footer-widget mb-4">
+                  <h2 class="ftco-heading-2">Have a Questions?</h2>
+                  <div class="block-23 mb-3">
+                    <ul>
+                      <li><span class="icon icon-map-marker"></span><span class="text">Politeknik Negeri Indramayu</span></li>
+                      <li><a href="#"><span class="icon icon-phone"></span><span class="text">+62...</span></a></li>
+                      <li><a href="#"><span class="icon icon-envelope"></span><span class="text">polindra.ac.id</span></a></li>
+                    </ul>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 text-center">
+  
+              <p>
+    Copyright &copy;<script>document.write(new Date().getFullYear());</script> Kelompok 7 | This web is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="" target="_blank">Politeknik Negeri Indramayu</a></p>
+            </div>
+          </div>
+        </div>
+      </footer>
+    
+  
 
-    <!-- #### JAVASCRIPT FILES ### -->
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script>
-        window.jQuery || document.write('<script src="js/jquery-1.11.0.min.js"><\/script>')
-    </script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-    <script src="{{ url("/assets/front/js/jquery.cookie.js") }}"></script>
-    <script src="{{ url("/assets/front/js/waypoints.min.js") }}"></script>
-    <script src="{{ url("/assets/front/js/jquery.counterup.min.js") }}"></script>
-    <script src="{{ url("/assets/front/js/jquery.parallax-1.1.3.js") }}"></script>
-    <script src="{{ url("/assets/front/js/front.js") }}"></script>
-    <!-- jQuery -->
-    <script src="{{ url("/assets/backend/vendors/jquery/dist/jquery.min.js") }}"></script>
-    <!-- Bootstrap -->
-    <script src="{{ url("/assets/backend/vendors/bootstrap/dist/js/bootstrap.min.js") }}"></script>
-    <!-- Custom Theme Scripts -->
-    <script src="{{ url("/assets/backend/build/js/custom.min.js") }}"></script>
-    <script src="{{ url("/assets/backend/build/js/routes.js") }}"></script>
-    @yield('javascript')
-</body>
-
+  <script src="sports/js/jquery.min.js"></script>
+  <script src="sports/js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="sports/js/popper.min.js"></script>
+  <script src="sports/js/bootstrap.min.js"></script>
+  <script src="sports/js/jquery.easing.1.3.js"></script>
+  <script src="sports/js/jquery.waypoints.min.js"></script>
+  <script src="sports/js/jquery.stellar.min.js"></script>
+  <script src="sports/js/owl.carousel.min.js"></script>
+  <script src="sports/js/jquery.magnific-popup.min.js"></script>
+  <script src="sports/js/aos.js"></script>
+  <script src="sports/js/jquery.animateNumber.min.js"></script>
+  <script src="sports/js/bootstrap-datepicker.js"></script>
+  <script src="sports/js/jquery.timepicker.min.js"></script>
+  <script src="sports/js/scrollax.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="sports/js/google-map.js"></script>
+  <script src="sports/js/main.js"></script>
+  <script src="{{ asset("/assets/front/js/jquery.cookie.js") }}"></script>
+    <script src="{{ asset("/assets/front/js/waypoints.min.js") }}"></script>
+    <script src="{{ asset("/assets/front/js/jquery.counterup.min.js") }}"></script>
+    <script src="{{ asset("/assets/front/js/jquery.parallax-1.1.3.js") }}"></script>
+    <script src="{{ asset("/assets/front/js/front.js") }}"></script>
+    
+  </body>
 </html>

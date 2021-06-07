@@ -14,6 +14,7 @@ use App\Booking;
 use App\BookingDetail;
 use App\Payment;
 use App\Coupon;
+use App\Mitra;
 use Auth;
 
 
@@ -29,8 +30,17 @@ class FrontController extends Controller
         $data['title'] = "Home";
 
         $data['last_articles'] = Article::limit(4)->get();
-        
-        $pitch = Pitch::all();
+        $data['articles'] = DB::table('article as a')
+            ->join('article_category as ac', 'ac.id', '=', 'a.article_category_id')
+            ->join('user as u', 'u.id', '=', 'a.user_id')
+            ->select('a.title', 'ac.name', 'u.fullname', 'a.content', 'a.created_at', 'a.content')
+            ->where('a.isactive', '1')
+            ->paginate(5);
+
+        $pitch = DB::table('pitch')
+            ->join('sports', 'sports.id_sports', '=', 'pitch.id_sports')
+            ->select('sports.*', 'pitch.*')
+            ->get();
         $sports = Sports::all();
         return view('frontend.template',compact('pitch','sports'))->with($data);
     }
@@ -41,17 +51,65 @@ class FrontController extends Controller
         $data['last_articles'] = Article::limit(4)->get();
         $pitch = Pitch::all();
         $sports = Sports::all();
-        
+        $mitra = Mitra::all();
         $data['pitches'] = DB::table('pitch as p')->join(DB::raw('(select pitch_id, min(price) as price from pitch_price group by pitch_id) as pp'),'pp.pitch_id','=','p.id')
                             ->select('p.id','p.name','p.image','pp.price')->get();
-        return view('user.home',compact('pitch','sports'))->with($data);
+        return view('user.home',compact('pitch','sports','mitra'))->with($data);
     }
 
+    public function mitra()
+    {
+        $data['title'] = "Home";
+
+        $data['last_articles'] = Article::limit(4)->get();
+        $data['articles'] = DB::table('article as a')
+            ->join('article_category as ac', 'ac.id', '=', 'a.article_category_id')
+            ->join('user as u', 'u.id', '=', 'a.user_id')
+            ->select('a.title', 'ac.name', 'u.fullname', 'a.content', 'a.created_at', 'a.content')
+            ->where('a.isactive', '1')
+            ->paginate(5);
+
+        $pitch = DB::table('pitch')
+            ->join('sports', 'sports.id_sports', '=', 'pitch.id_sports')
+            ->join('user', 'user.id', '=', 'pitch.user_id')
+            ->select('sports.*', 'pitch.*','user.*')
+            ->where('pitch.id','14')
+            ->get();
+        $sports = Sports::all();
+        return view('user.mitra',compact('pitch','sports'))->with($data);
+    }
+
+    public function cari(Request $request)
+	{
+		// menangkap data pencarian
+		$cari = $request->cari;
+ 
+    		// mengambil data dari table pegawai sesuai pencarian data
+		$mitra = DB::table('mitra')
+		->where('kota','like',"%".$cari."%")
+		->paginate();
+
+        $pitch = Pitch::all();
+        	// mengirim data mitra ke view index
+            return view('user.homecari',compact('mitra','pitch'));
+ 
+	}
     public function login()
     {
-        $pitch = Pitch::all();
+        $data['last_articles'] = Article::limit(4)->get();
+        $data['articles'] = DB::table('article as a')
+            ->join('article_category as ac', 'ac.id', '=', 'a.article_category_id')
+            ->join('user as u', 'u.id', '=', 'a.user_id')
+            ->select('a.title', 'ac.name', 'u.fullname', 'a.content', 'a.created_at', 'a.content')
+            ->where('a.isactive', '1')
+            ->paginate(5);
+
+        $pitch = DB::table('pitch')
+            ->join('sports', 'sports.id_sports', '=', 'pitch.id_sports')
+            ->select('sports.*', 'pitch.*')
+            ->get();
         $sports = Sports::all();
-        return view('frontend.template',compact('pitch','sports'));
+        return view('frontend.template',compact('pitch','sports'))->with($data);
         
     }
 
@@ -91,14 +149,6 @@ class FrontController extends Controller
         $pitch = Pitch::all();
         $sports = Sports::all();
         return view('frontend.news',compact('pitch','sports'))->with($data);
-    }
-
-    public function contact()
-    {
-        $data['title'] = "Hubungi Kami";
-
-        $data['last_articles'] = Article::limit(4)->get();
-        return view('frontend.contact')->with($data);
     }
 
     public function detail($id)
@@ -205,7 +255,7 @@ class FrontController extends Controller
                         $newnotrans = "0" . strval($newnotrans);
                     }
                 }
-                $newnotrans = "GM/FTS/" . $newnotrans . "/" . date("Y");
+                $newnotrans = "SPORTS/" . $newnotrans . "/" . date("Y");
 
                 $booking = new Booking();
                 $booking->notrans = $newnotrans;
@@ -267,18 +317,6 @@ class FrontController extends Controller
         if (Auth::check() && Auth::user()->role == 'member') {
             $data['title'] = "Booking Saya";
 
-            $data['name'] = Setting::where('code', 'COMP_NAME')->first();
-            $data['address'] = Setting::where('code', 'COMP_ADDRESS')->first();
-            $data['city'] = Setting::where('code', 'COMP_CITY')->first();
-            $data['state'] = Setting::where('code', 'COMP_STATE')->first();
-            $data['zipcode'] = Setting::where('code', 'COMP_ZIPCODE')->first();
-            $data['phone'] = Setting::where('code', 'COMP_PHONE')->first();
-            $data['hp'] = Setting::where('code', 'COMP_HP')->first();
-            $data['email'] = Setting::where('code', 'COMP_EMAIL')->first();
-            $data['image'] = Setting::where('code', 'COMP_IMG')->first();
-            $data['facebook'] = Setting::where('code', 'SOC_FACEBOOK')->first();
-            $data['twitter'] = Setting::where('code', 'SOC_TWITTER')->first();
-            $data['instagram'] = Setting::where('code', 'SOC_INSTAGRAM')->first();
             $data['last_articles'] = Article::limit(4)->get();
 
             $sql = "select booking_id, sum(price) as price, count(booking_id) as time_count from booking_detail group by booking_id ";
@@ -290,7 +328,7 @@ class FrontController extends Controller
                 ->where('user_id', Auth::user()->id)
                 ->select('b.notrans', 'b.name', 'b.phone', 'd.price', 'total_payment', 'd.time_count', 'b.created_at', 'u.username', 'b.id')->paginate(10);
 
-            return view('frontend.order')->with($data);
+            return view('user.order')->with($data);
         } else {
             return redirect()->route('front.login');
         }
@@ -318,7 +356,6 @@ class FrontController extends Controller
 
             $data['payment_total'] = Payment::where('booking_id', $id)->sum('amount');
             $data['count_transfer'] =  Payment::where('booking_id', $id)->where('type', 'transfer')->count();
-            $data['mindp'] = floatval(Setting::where('code', 'FTS_MINDP')->first()->value) / 100 * $data['booking_total'];
 
             $data['payments'] = DB::table('payment as p')
                 ->leftJoin('user as u', 'u.id', '=', 'p.user_id')

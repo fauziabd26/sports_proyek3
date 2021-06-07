@@ -17,17 +17,8 @@ Route::get('/admin', function () {
 Route::get('/', 'FrontController@index')->name('front.home');
 Route::get('/login', 'FrontController@login')->name('front.login');
 Route::get('/register', 'FrontController@register')->name('front.register');
-Route::get('/about', 'FrontController@about')->name('front.about');
-Route::get('/news', 'FrontController@news')->name('front.news');
-Route::get('/contact', 'FrontController@contact')->name('front.contact');
 Route::post('/login', 'UserController@login_member')->name('front.login_post');
 Route::post('/register', 'UserController@register_member')->name('front.register_post');
-Route::get('/pitch/detail/{id}', 'FrontController@detail')->name('front.detail');
-Route::get('/pitch/timesheet/{id}/date/{date}', 'FrontController@timesheet')->name('front.timesheet');
-Route::post('/checkout', 'FrontController@checkout')->name('front.checkout');
-Route::get('/order', 'FrontController@order')->name('front.order');
-Route::get('/order/detail/{id}', 'FrontController@detail_order')->name('front.detail_order');
-Route::post('/confirm', 'FrontController@confirm')->name('front.confirm');
 
 Route::post('/adminpage/login', 'UserController@login')->name('user.login');
 Route::post('/registeradmin/store', 'UserController@adminstore')->name('admin.store');
@@ -86,6 +77,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/admin/pitch', 'PitchController@adminstore')->name('pitch.admin.store');
     Route::get('/adminpage/pitch/datatable', 'PitchController@show')->name("pitch.datatable");
     Route::get('/adminpage/pitch/{id}', 'PitchController@edit')->name("pitch.edit");
+    Route::get('/admin/pitch/{id}', 'PitchController@edit')->name("pitch.admin.edit");
     Route::patch('/adminpage/pitch/{id}', 'PitchController@update')->name("pitch.update");
     Route::delete('/admindelete/pitch/{id}', 'PitchController@destroy')->name("pitch.destroy");
 
@@ -119,7 +111,6 @@ Route::group(['middleware' => 'auth'], function () {
     //route CRUD Mitra(Super)
     Route::get('/mitra-admin', 'MitraController@index')->name("mitra");
     Route::get('/mitra-super', 'MitraController@super')->name("mitra-super");
-    Route::get('/mitra/cari', 'MitraController@cari');
     Route::post('/mitra-admin/store', 'MitraController@store');
     Route::post('/mitra-admin/mitrastore', 'MitraController@mitrastore');
     Route::get('/showmitra', 'MitraController@show');
@@ -130,6 +121,14 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::get('/homeuser', 'FrontController@homeuser')->name('front.user.home');
+    Route::get('/pitch-detail-{id}', 'FrontController@detail')->name('front.detail');
+    Route::get('/mitra-{id}', 'FrontController@mitra')->name('front.mitra');
+    Route::get('/pitch/timesheet/{id}/date/{date}', 'FrontController@timesheet')->name('front.timesheet');
+    Route::post('/checkout', 'FrontController@checkout')->name('front.checkout');
+    Route::get('/order', 'FrontController@order')->name('front.order');
+    Route::get('/order-detail-{id}', 'FrontController@detail_order')->name('front.detail_order');
+    Route::post('/confirm', 'FrontController@confirm')->name('front.confirm');
+    Route::get('/kota-cari', 'FrontController@cari');
 
     Route::get('/admin-sports', 'SportsController@index')->name('sports');
     Route::get('/admin-sports/cari', 'SportsController@cari');

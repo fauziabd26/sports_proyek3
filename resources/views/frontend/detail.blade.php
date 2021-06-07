@@ -1,11 +1,5 @@
 @extends('frontend.template')
 
-@section('css')
-<link href="{{ asset("/assets/front/css/owl.carousel.css") }}" rel="stylesheet">
-<link href="{{ asset("/assets/front/css/owl.theme.css") }}" rel="stylesheet">
-<link href="{{ asset("/assets/backend/vendors/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css") }}" rel="stylesheet">
-@endsection
-
 @section('content')
 <div id="heading-breadcrumbs">
     <div class="container">
@@ -17,7 +11,7 @@
                 <ul class="breadcrumb">
                     <li><a href="{{ route('front.home') }}">Home</a>
                     </li>
-                    <li><a href="portfolio-2.html">Lapangan</a>
+                    <li><a href="#">Lapangan</a>
                     </li>
                     <li>{{ $pitch->name }}</li>
                 </ul>
@@ -34,6 +28,7 @@
             <div class="project owl-carousel">
                 <div class="item">
                     <img src="{{ asset("/assets/front/img/main-slider1.jpg") }}" alt="" class="img-responsive">
+                    <img width="200px" src="{{ asset('images/sarana/') }}/{{$p->image }}" class="img img-2 d-flex justify-content-center align-items-center" heigth="100px">
                 </div>
             </div>
             <!-- /.project owl-slider -->
@@ -168,7 +163,7 @@
             bInfo: false,
             bDestroy: true,
             ajax: {
-                url: "/webfutsal/pitch/timesheet/{{ $pitch->id }}/date/"+datenow,
+                url: "/sports/pitch/timesheet/{{ $pitch->id }}/date/"+datenow,
                 data: function (d) {
                     /*d.time_number = [];
                     $('#table-checkout').find('tbody').find('tr').each(function(index, el) {

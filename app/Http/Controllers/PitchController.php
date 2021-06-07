@@ -12,6 +12,7 @@ use Yajra\Datatables\Datatables;
 use Carbon\Carbon;
 use Form;
 use App\User;
+use App\Mitra;
 use App\Sports;
 
 class PitchController extends Controller
@@ -28,9 +29,10 @@ class PitchController extends Controller
         $pitch = DB::table('pitch')
             ->join('sports', 'sports.id_sports', '=', 'pitch.id_sports')
             ->join('user', 'user.id', '=', 'pitch.user_id')
-            ->select('sports.*', 'user.*', 'pitch.*')
+            ->select('sports.*', 'user.*', 'pitch.*','mitra.*')
             ->get();
-        return view('backend.pitch.view', compact('pitch'))->with($data);
+        $mitra = Mitra::all();
+        return view('backend.pitch.view', compact('pitch','mitra'))->with($data);
     }
     public function indexadmin()
     {
@@ -42,7 +44,9 @@ class PitchController extends Controller
             ->select('sports.*', 'user.*', 'pitch.*')
             ->where('user.id', Auth::user()->id)
             ->get();
-        return view('backend.pitch.admin', compact('pitch','arrprice'));
+        $sports = Sports::all();
+        $mitra = Mitra::all();
+        return view('backend.pitch.admin', compact('pitch', 'sports','mitra'));
     }
 
     /**
@@ -189,10 +193,10 @@ class PitchController extends Controller
         $data['title'] = "Edit Lapangan";
         $data['title_desc'] = "";
         $pitches = DB::table('pitch')
-        ->where('id',$id)      
-        ->get();
+            ->where('id', $id)
+            ->get();
         $arrprice = PitchPrice::where('pitch_id', $id)->get();
-        return view('backend.pitch.edit',compact('pitches','arrprice'))->with($data);
+        return view('backend.pitch.edit', compact('pitches', 'arrprice'))->with($data);
     }
 
     /**
